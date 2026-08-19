@@ -1,0 +1,1369 @@
+{
+  "id": "career-curriculum-v1",
+  "title": "Software Engineering & AI Backend Career Path",
+  "description": "Comprehensive engineering competency path from computer foundations to system design and AI-augmented engineering.",
+  "modules": [
+    {
+      "id": "mod-1",
+      "number": 1,
+      "title": "Computer & Engineering Foundations",
+      "description": "Master foundational hardware abstraction, memory, operating systems, Linux shell, git version control, and networking.",
+      "category": "Foundations",
+      "topics": [
+        {
+          "id": "computer-fundamentals",
+          "moduleId": "mod-1",
+          "title": "Computer Fundamentals",
+          "description": "Understand CPU architecture, memory hierarchy, cache coherence, binary encoding, and I/O execution.",
+          "subtopics": [
+            { "id": "cpu-memory", "title": "CPU Architecture & Registers", "description": "Registers, instruction cycles, execution units", "keyConcepts": ["Registers", "ALU", "Instruction Cycle", "L1/L2/L3 Cache"] },
+            { "id": "binary-data", "title": "Binary & Data Representations", "description": "Two's complement, floating-point IEEE 754, ASCII/UTF-8", "keyConcepts": ["Two's Complement", "IEEE 754", "UTF-8 Encoding"] }
+          ],
+          "resources": [
+            { "id": "res-comp-1", "title": "CSAPP - Computer Systems: A Programmer's Perspective", "type": "book", "url": "https://csapp.cs.cmu.edu/", "isFree": false },
+            { "id": "res-comp-2", "title": "Crash Course Computer Science", "type": "video", "url": "https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulIgZBpdo", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-comp-1", "title": "Bitwise Operations & Masks", "type": "concept-question", "prompt": "How does bitwise masking work to check if a specific flag is set in a bitmask?" }
+          ]
+        },
+        {
+          "id": "operating-systems",
+          "moduleId": "mod-1",
+          "title": "Operating Systems",
+          "description": "Processes vs threads, concurrency primitives, virtual memory, paging, and system calls.",
+          "subtopics": [
+            { "id": "processes-threads", "title": "Processes & Threads", "description": "Context switching, thread stacks, shared memory", "keyConcepts": ["Process Control Block", "Thread Stacks", "Context Switching"] },
+            { "id": "virtual-memory", "title": "Virtual Memory & Paging", "description": "Page tables, TLB, page faults, swapping", "keyConcepts": ["Page Table", "TLB", "Page Fault", "Virtual Addressing"] }
+          ],
+          "resources": [
+            { "id": "res-os-1", "title": "Operating Systems: Three Easy Pieces (OSTEP)", "type": "book", "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-os-1", "title": "Race Condition & Mutex Locks", "type": "debugging-task", "prompt": "Identify why concurrent increment of a shared counter produces wrong results." }
+          ]
+        },
+        {
+          "id": "linux-cli",
+          "moduleId": "mod-1",
+          "title": "Linux & CLI",
+          "description": "Linux shell mastery, pipes, stdin/stdout/stderr, file permissions, grep, awk, sed, systemd, and bash scripting.",
+          "subtopics": [
+            { "id": "linux-commands", "title": "Shell & Core Utilities", "description": "Pipes, redirection, grep, find, xargs", "keyConcepts": ["Pipes", "Redirection", "xargs", "grep"] },
+            { "id": "permissions-process", "title": "Permissions & Process Control", "description": "chmod, chown, ps, top, kill, systemctl", "keyConcepts": ["chmod Octal", "Signal Handling", "systemd"] }
+          ],
+          "resources": [
+            { "id": "res-linux-1", "title": "The Linux Command Line (LinuxCommand.org)", "type": "book", "url": "https://linuxcommand.org/tlcl.php", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-linux-1", "title": "Log Analysis with Awk & Sed", "type": "coding-task", "prompt": "Write a one-liner bash command to count unique IP addresses in an HTTP access log file." }
+          ]
+        },
+        {
+          "id": "git-github",
+          "moduleId": "mod-1",
+          "title": "Git & GitHub",
+          "description": "Git DAG architecture, branching strategies, rebasing vs merging, cherry-picking, submodules, and pull request workflows.",
+          "subtopics": [
+            { "id": "git-internals", "title": "Git Object Storage & DAG", "description": "Blobs, trees, commits, refs", "keyConcepts": ["Git Commit Object", "SHA-1 Hash", "Reflog"] },
+            { "id": "git-workflows", "title": "Rebasing & Trunk-Based Development", "description": "Interactive rebase, merge conflicts, bisect", "keyConcepts": ["Interactive Rebase", "Git Bisect", "Trunk-Based Development"] }
+          ],
+          "resources": [
+            { "id": "res-git-1", "title": "Pro Git Book", "type": "book", "url": "https://git-scm.com/book/en/v2", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-git-1", "title": "Resolving Rebase Conflicts", "type": "concept-question", "prompt": "When should you use `git rebase -i` instead of `git merge`?" }
+          ]
+        },
+        {
+          "id": "networking-fundamentals",
+          "moduleId": "mod-1",
+          "title": "Networking Fundamentals",
+          "description": "OSI & TCP/IP models, TCP 3-way handshake, TLS 1.3 handshake, DNS resolution, and IP routing.",
+          "subtopics": [
+            { "id": "tcp-ip", "title": "TCP/IP & Transport Layer", "description": "Sockets, TCP handshake, flow control, UDP", "keyConcepts": ["TCP 3-Way Handshake", "SYN-ACK", "Flow Control", "UDP"] },
+            { "id": "dns-tls", "title": "DNS Resolution & TLS Encryption", "description": "DNS records, SSL/TLS handshake, certificates", "keyConcepts": ["A/AAAA Records", "TLS 1.3 Handshake", "Public-Key Cryptography"] }
+          ],
+          "resources": [
+            { "id": "res-net-1", "title": "High Performance Browser Networking", "type": "book", "url": "https://hpbn.co/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-net-1", "title": "Trace an HTTP Connection", "type": "concept-question", "prompt": "Trace step-by-step what happens from entering a URL to receiving the first byte of HTTP response." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-2",
+      "number": 2,
+      "title": "Programming & Problem Solving",
+      "description": "Master core language mechanics, OOP patterns, essential data structures, algorithms, and complexity analysis.",
+      "category": "Problem Solving",
+      "topics": [
+        {
+          "id": "programming-fundamentals",
+          "moduleId": "mod-2",
+          "title": "Programming Fundamentals",
+          "description": "Control flow, lexical scope, closures, memory allocation (stack vs heap), and error handling.",
+          "subtopics": [
+            { "id": "memory-allocation", "title": "Stack vs Heap Allocation", "description": "Value vs reference semantics, stack frames", "keyConcepts": ["Stack Frame", "Heap Allocation", "Pointers/References"] }
+          ],
+          "resources": [
+            { "id": "res-prog-1", "title": "Structure and Interpretation of Computer Programs", "type": "book", "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.html", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-prog-1", "title": "Closure Memory Leaks", "type": "debugging-task", "prompt": "Explain how closures retain references to outer scope variables and prevent garbage collection." }
+          ]
+        },
+        {
+          "id": "object-oriented-programming",
+          "moduleId": "mod-2",
+          "title": "Object-Oriented Programming",
+          "description": "Encapsulation, inheritance, polymorphism, abstraction, composition over inheritance, and design patterns.",
+          "subtopics": [
+            { "id": "oop-principles", "title": "Core OOP Pillars", "description": "Polymorphism, dynamic dispatch, encapsulation", "keyConcepts": ["Dynamic Dispatch", "Abstract Classes", "Interfaces"] }
+          ],
+          "resources": [
+            { "id": "res-oop-1", "title": "Refactoring Guru - Design Patterns", "type": "article", "url": "https://refactoring.guru/design-patterns", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-oop-1", "title": "Composition vs Inheritance", "type": "concept-question", "prompt": "Why is 'Composition over Inheritance' a recommended software engineering rule?" }
+          ]
+        },
+        {
+          "id": "data-structures",
+          "moduleId": "mod-2",
+          "title": "Data Structures",
+          "description": "Arrays, Linked Lists, Hash Tables, Stacks, Queues, Binary Trees, Heaps, Graphs, and Tries.",
+          "subtopics": [
+            { "id": "hash-tables", "title": "Hash Tables & Collision Resolution", "description": "Separate chaining, open addressing, hash functions", "keyConcepts": ["Hash Collisions", "Load Factor", "Rehashing"] },
+            { "id": "trees-graphs", "title": "Trees, Heaps & Graphs", "description": "Binary search trees, priority queues, adjacency lists", "keyConcepts": ["BST", "Max/Min Heap", "Adjacency List"] }
+          ],
+          "resources": [
+            { "id": "res-ds-1", "title": "NeetCode DSA Roadmap", "type": "course", "url": "https://neetcode.io/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-ds-1", "title": "Implement a Min-Heap", "type": "coding-task", "prompt": "Implement a MinHeap data structure with insert and extractMin operations in O(log N)." }
+          ]
+        },
+        {
+          "id": "algorithms",
+          "moduleId": "mod-2",
+          "title": "Algorithms",
+          "description": "Sorting, Searching, Two Pointers, Sliding Window, Fast/Slow Pointers, BFS, DFS, Dynamic Programming.",
+          "subtopics": [
+            { "id": "graph-traversal", "title": "Graph Traversal (BFS & DFS)", "description": "Shortest path, cycle detection, topological sort", "keyConcepts": ["BFS", "DFS", "Topological Sort", "Dijkstra"] },
+            { "id": "dynamic-programming", "title": "Dynamic Programming", "description": "Memoization, tabulation, state transitions", "keyConcepts": ["Overlapping Subproblems", "Optimal Substructure", "Memoization"] }
+          ],
+          "resources": [
+            { "id": "res-algo-1", "title": "Introduction to Algorithms (CLRS)", "type": "book", "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/", "isFree": false }
+          ],
+          "practiceExercises": [
+            { "id": "prac-algo-1", "title": "Sliding Window Maximum", "type": "coding-task", "prompt": "Solve the Sliding Window Maximum problem using a monotonic deque in O(N) time." }
+          ]
+        },
+        {
+          "id": "complexity-problem-solving",
+          "moduleId": "mod-2",
+          "title": "Complexity & Problem Solving",
+          "description": "Big-O notation, time and space complexity analysis, amortized complexity, and trade-off evaluation.",
+          "subtopics": [
+            { "id": "big-o-analysis", "title": "Time & Space Complexity Analysis", "description": "Best/worst/average case, space complexity bounds", "keyConcepts": ["O(1)", "O(log N)", "O(N)", "Amortized Analysis"] }
+          ],
+          "resources": [
+            { "id": "res-comp-sol-1", "title": "Big-O Cheat Sheet", "type": "article", "url": "https://www.bigocheatsheet.com/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-comp-sol-1", "title": "Amortized Complexity of Dynamic Array", "type": "concept-question", "prompt": "Explain why vector/array push_back has O(1) amortized time complexity." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-3",
+      "number": 3,
+      "title": "Web Foundations",
+      "description": "Master core web standards: semantic HTML, CSS layout systems, modern JavaScript ES6+, HTTP protocol, and browser DOM engine.",
+      "category": "Web",
+      "topics": [
+        {
+          "id": "html",
+          "moduleId": "mod-3",
+          "title": "HTML",
+          "description": "Semantic HTML5, accessibility attributes (ARIA), forms validation, and document structure.",
+          "subtopics": [
+            { "id": "semantic-html", "title": "Semantic HTML & Accessibility", "description": "main, nav, article, section, ARIA roles", "keyConcepts": ["Semantic Tags", "ARIA Landmarks", "Form Constraints"] }
+          ],
+          "resources": [
+            { "id": "res-html-1", "title": "MDN Web Docs - HTML", "type": "documentation", "url": "https://developer.mozilla.org/en-US/docs/Web/HTML", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-html-1", "title": "Accessible Form Markup", "type": "coding-task", "prompt": "Create an accessible login form with label associations, error descriptions, and ARIA attributes." }
+          ]
+        },
+        {
+          "id": "css",
+          "moduleId": "mod-3",
+          "title": "CSS",
+          "description": "Box model, Flexbox, CSS Grid, specificity, custom properties, responsive design, and CSS animations.",
+          "subtopics": [
+            { "id": "flex-grid", "title": "Flexbox & CSS Grid Layouts", "description": "Two-dimensional layout grid, flex alignment", "keyConcepts": ["Flexbox Alignment", "Grid Template Areas", "CSS Variables"] }
+          ],
+          "resources": [
+            { "id": "res-css-1", "title": "CSS Tricks - A Complete Guide to Flexbox", "type": "article", "url": "https://css-tricks.com/snippets/css/a-guide-to-flexbox/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-css-1", "title": "Responsive Dashboard Grid", "type": "coding-task", "prompt": "Build a responsive grid layout using CSS Grid and media queries." }
+          ]
+        },
+        {
+          "id": "javascript",
+          "moduleId": "mod-3",
+          "title": "JavaScript",
+          "description": "ES6+ syntax, Promises, async/await, Event Loop, prototype chain, scoping, and modules.",
+          "subtopics": [
+            { "id": "event-loop", "title": "Event Loop & Asynchronous JS", "description": "Call stack, microtasks vs macrotasks, Promises", "keyConcepts": ["Call Stack", "Microtask Queue", "Macrotask Queue", "Event Loop"] }
+          ],
+          "resources": [
+            { "id": "res-js-1", "title": "You Don't Know JS Yet", "type": "book", "url": "https://github.com/getify/You-Dont-Know-JS", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-js-1", "title": "Promise Order Prediction", "type": "code-reading", "prompt": "Predict the execution order of console.log statements containing setTimeout and Promise.resolve." }
+          ]
+        },
+        {
+          "id": "http-web-fundamentals",
+          "moduleId": "mod-3",
+          "title": "HTTP & Web Fundamentals",
+          "description": "HTTP methods, status codes, headers, CORS, cookies, WebSockets, and caching headers.",
+          "subtopics": [
+            { "id": "cors-cookies", "title": "CORS & Browser Storage/Cookies", "description": "Preflight OPTIONS requests, SameSite cookies, HTTPOnly", "keyConcepts": ["CORS Preflight", "SameSite Cookies", "Cache-Control"] }
+          ],
+          "resources": [
+            { "id": "res-http-1", "title": "MDN - HTTP Protocol", "type": "documentation", "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-http-1", "title": "Fixing CORS Preflight Error", "type": "debugging-task", "prompt": "Identify why a custom header in fetch triggers a CORS failure and how server headers fix it." }
+          ]
+        },
+        {
+          "id": "browser-fundamentals",
+          "moduleId": "mod-3",
+          "title": "Browser Fundamentals",
+          "description": "Critical Rendering Path, DOM tree, CSSOM, layout, paint, composite, event bubbling, and memory management.",
+          "subtopics": [
+            { "id": "rendering-path", "title": "Critical Rendering Path", "description": "DOM, CSSOM, Layout, Paint, Compositing", "keyConcepts": ["DOM Tree", "Reflow/Layout", "Repaint", "Compositing Layer"] }
+          ],
+          "resources": [
+            { "id": "res-browser-1", "title": "How Browsers Work", "type": "article", "url": "https://web.dev/howbrowserswork/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-browser-1", "title": "Event Delegation Pattern", "type": "coding-task", "prompt": "Implement event delegation on a parent element to handle clicks on dynamic child items." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-4",
+      "number": 4,
+      "title": "Frontend Engineering",
+      "description": "Build high-performance, modular frontend applications with React, TypeScript, global state, testing, and accessibility.",
+      "category": "Frontend",
+      "topics": [
+        {
+          "id": "react",
+          "moduleId": "mod-4",
+          "title": "React",
+          "description": "Components, Virtual DOM, JSX, Props, State, Hooks (useState, useEffect, useMemo, useCallback, useRef), Context, Error Boundaries.",
+          "subtopics": [
+            { "id": "react-hooks", "title": "React Hooks & State Flow", "description": "Hook rules, dependency arrays, stale closures", "keyConcepts": ["Stale Closures", "useEffect Dependencies", "useMemo/useCallback"] },
+            { "id": "react-re-renders", "title": "Virtual DOM & Re-render Optimization", "description": "Reconciliation, key prop, React.memo, context splitting", "keyConcepts": ["Reconciliation", "Virtual DOM Diffing", "React.memo"] }
+          ],
+          "resources": [
+            { "id": "res-react-1", "title": "React Official Documentation", "type": "documentation", "url": "https://react.dev/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-react-1", "title": "Debug Stale Closure in useEffect", "type": "debugging-task", "prompt": "Identify why a setInterval callback inside useEffect logs stale state values and fix it." }
+          ]
+        },
+        {
+          "id": "typescript",
+          "moduleId": "mod-4",
+          "title": "TypeScript",
+          "description": "Strict mode, interfaces, generics, discriminated unions, utility types, type guards, and declaration files.",
+          "subtopics": [
+            { "id": "discriminated-unions", "title": "Discriminated Unions & Pattern Matching", "description": "Exhaustive switch checking, type guards", "keyConcepts": ["Discriminated Unions", "Type Narrowing", "Exhaustiveness Check"] }
+          ],
+          "resources": [
+            { "id": "res-ts-1", "title": "TypeScript Handbook", "type": "documentation", "url": "https://www.typescriptlang.org/docs/handbook/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-ts-1", "title": "Type-Safe Action Reducer", "type": "coding-task", "prompt": "Create a type-safe State & Action interface using discriminated unions and generic handlers." }
+          ]
+        },
+        {
+          "id": "frontend-architecture",
+          "moduleId": "mod-4",
+          "title": "Frontend Architecture",
+          "description": "Feature-based directory structure, separation of UI and business logic, API layer abstraction, and component design patterns.",
+          "subtopics": [
+            { "id": "feature-architecture", "title": "Feature-Based Architecture", "description": "Component composition, custom hook abstraction, service layers", "keyConcepts": ["Separation of Concerns", "Container/Presenter", "Service Adapters"] }
+          ],
+          "resources": [
+            { "id": "res-fe-arch-1", "title": "Bulletproof React Architecture", "type": "article", "url": "https://github.com/alan2207/bulletproof-react", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-fe-arch-1", "title": "Refactoring Monolithic Component", "type": "coding-task", "prompt": "Extract custom hooks and UI components from a monolithic 500-line React component." }
+          ]
+        },
+        {
+          "id": "state-management",
+          "moduleId": "mod-4",
+          "title": "State Management",
+          "description": "Local state vs server state vs global state. React Query/TanStack Query, Zustand, Redux Toolkit.",
+          "subtopics": [
+            { "id": "server-state-react-query", "title": "Server State with React Query", "description": "Query caching, invalidation, mutations, optimistic updates", "keyConcepts": ["Query Keys", "Cache Invalidation", "Optimistic UI"] }
+          ],
+          "resources": [
+            { "id": "res-state-1", "title": "TanStack Query Docs", "type": "documentation", "url": "https://tanstack.com/query/latest", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-state-1", "title": "Optimistic UI Mutation", "type": "coding-task", "prompt": "Implement an optimistic update mutation for a like button using React Query." }
+          ]
+        },
+        {
+          "id": "testing",
+          "moduleId": "mod-4",
+          "title": "Testing (Frontend)",
+          "description": "Unit testing with Vitest/Jest, React Testing Library, user event interactions, MSW (Mock Service Worker), and E2E with Playwright.",
+          "subtopics": [
+            { "id": "rtl-msw", "title": "React Testing Library & MSW", "description": "Testing user interactions, mocking API endpoints", "keyConcepts": ["User Events", "Screen Queries", "MSW Handler Setup"] }
+          ],
+          "resources": [
+            { "id": "res-test-1", "title": "Testing Library Guiding Principles", "type": "article", "url": "https://testing-library.com/docs/guiding-principles/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-test-1", "title": "Write Async Component Test", "type": "coding-task", "prompt": "Write a test using Vitest and React Testing Library that waits for async data loading and verifies rendered DOM." }
+          ]
+        },
+        {
+          "id": "frontend-performance",
+          "moduleId": "mod-4",
+          "title": "Frontend Performance",
+          "description": "Core Web Vitals (LCP, FID/INP, CLS), code splitting, lazy loading, image optimization, virtualization, and bundle analysis.",
+          "subtopics": [
+            { "id": "web-vitals", "title": "Core Web Vitals & Code Splitting", "description": "LCP, CLS, INP, React.lazy, dynamic import", "keyConcepts": ["Largest Contentful Paint", "Cumulative Layout Shift", "Dynamic Import"] }
+          ],
+          "resources": [
+            { "id": "res-perf-1", "title": "Web.dev Performance Guides", "type": "article", "url": "https://web.dev/performance/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-perf-1", "title": "List Virtualization Implementation", "type": "concept-question", "prompt": "How does list virtualization prevent rendering 10,000 DOM elements at once?" }
+          ]
+        },
+        {
+          "id": "accessibility",
+          "moduleId": "mod-4",
+          "title": "Accessibility (a11y)",
+          "description": "WCAG 2.1 guidelines, keyboard navigation, focus management, screen reader compatibility, and contrast requirements.",
+          "subtopics": [
+            { "id": "wcag-keyboard", "title": "WCAG Compliance & Keyboard Navigation", "description": "Focus trap, aria-live, color contrast, keyboard accessibility", "keyConcepts": ["Focus Trap", "Aria-Live Region", "WCAG AA Standard"] }
+          ],
+          "resources": [
+            { "id": "res-a11y-1", "title": "W3C Web Accessibility Initiative (WAI)", "type": "documentation", "url": "https://www.w3.org/WAI/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-a11y-1", "title": "Accessible Modal Dialog", "type": "coding-task", "prompt": "Implement a modal dialog with focus trapping and ESC key closing." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-5",
+      "number": 5,
+      "title": "Backend Engineering",
+      "description": "Build production Node.js services, RESTful APIs, JWT/OAuth auth, error handling, logging, testing, and security.",
+      "category": "Backend",
+      "topics": [
+        {
+          "id": "nodejs",
+          "moduleId": "mod-5",
+          "title": "Node.js",
+          "description": "Node runtime architecture, libuv thread pool, Streams, Buffer, Cluster module, and process event loops.",
+          "subtopics": [
+            { "id": "libuv-streams", "title": "Libuv & Node.js Streams", "description": "Non-blocking I/O, backpressure, duplex/transform streams", "keyConcepts": ["Libuv Thread Pool", "Backpressure", "Node.js Streams"] }
+          ],
+          "resources": [
+            { "id": "res-node-1", "title": "Node.js Official Documentation", "type": "documentation", "url": "https://nodejs.org/en/docs/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-node-1", "title": "Stream Big File without Memory Overflow", "type": "coding-task", "prompt": "Write a Node.js script using streams to process a 5GB log file within a 50MB RAM limit." }
+          ]
+        },
+        {
+          "id": "rest-apis",
+          "moduleId": "mod-5",
+          "title": "REST APIs",
+          "description": "API design, HTTP verbs, resource naming, pagination (offset vs cursor), rate limiting, and OpenAPI/Swagger specs.",
+          "subtopics": [
+            { "id": "api-pagination-ratelimit", "title": "Cursor Pagination & Rate Limiting", "description": "Cursor vs offset pagination, token bucket, leaky bucket", "keyConcepts": ["Cursor Pagination", "Token Bucket Algorithm", "OpenAPI 3.0"] }
+          ],
+          "resources": [
+            { "id": "res-rest-1", "title": "Microsoft REST API Guidelines", "type": "article", "url": "https://github.com/microsoft/api-guidelines", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-rest-1", "title": "Design Cursor-Based API Pagination", "type": "concept-question", "prompt": "Why is cursor pagination superior to offset pagination for high-velocity real-time data feeds?" }
+          ]
+        },
+        {
+          "id": "authentication-authorization",
+          "moduleId": "mod-5",
+          "title": "Authentication & Authorization",
+          "description": "JWT tokens, refresh token rotation, OAuth 2.0 PKCE, RBAC (Role-Based Access Control), and ABAC.",
+          "subtopics": [
+            { "id": "jwt-oauth", "title": "JWT & OAuth 2.0 PKCE Flow", "description": "Access tokens, refresh tokens, signing algorithms (RS256 vs HS256)", "keyConcepts": ["JWT RS256", "OAuth PKCE", "RBAC Middleware"] }
+          ],
+          "resources": [
+            { "id": "res-auth-1", "title": "Auth0 OAuth 2.0 & OpenID Connect Guide", "type": "article", "url": "https://auth0.com/docs/get-started/authentication-and-authorization-flow", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-auth-1", "title": "Secure Refresh Token Rotation", "type": "coding-task", "prompt": "Implement refresh token reuse detection and revocation in Node.js." }
+          ]
+        },
+        {
+          "id": "backend-architecture",
+          "moduleId": "mod-5",
+          "title": "Backend Architecture",
+          "description": "Clean architecture, controller-service-repository pattern, dependency injection, and domain-driven design basics.",
+          "subtopics": [
+            { "id": "layered-architecture", "title": "Controller-Service-Repository Pattern", "description": "Decoupling business logic from framework and ORM", "keyConcepts": ["Clean Architecture", "Dependency Injection", "Repository Pattern"] }
+          ],
+          "resources": [
+            { "id": "res-be-arch-1", "title": "Clean Architecture by Robert C. Martin", "type": "book", "url": "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-be-arch-1", "title": "Implement Repository Interface", "type": "coding-task", "prompt": "Decouple a service from MongoDB by creating an abstract UserRepository interface." }
+          ]
+        },
+        {
+          "id": "error-handling-logging",
+          "moduleId": "mod-5",
+          "title": "Error Handling & Logging",
+          "description": "Structured logging (JSON), correlation IDs, central error middleware, error hierarchy, and Sentry/OpenTelemetry.",
+          "subtopics": [
+            { "id": "structured-logging", "title": "Structured Logging & Trace Context", "description": "Pino/Winston, correlation IDs, async context tracking", "keyConcepts": ["Correlation ID", "Structured JSON Logging", "AsyncLocalStorage"] }
+          ],
+          "resources": [
+            { "id": "res-log-1", "title": "OpenTelemetry Documentation", "type": "documentation", "url": "https://opentelemetry.io/docs/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-log-1", "title": "Express Correlation ID Middleware", "type": "coding-task", "prompt": "Write an Express middleware that attaches a unique trace ID to incoming requests and log context." }
+          ]
+        },
+        {
+          "id": "backend-testing",
+          "moduleId": "mod-5",
+          "title": "Backend Testing",
+          "description": "Integration testing with Supertest, database test containers, mocking external services, and code coverage.",
+          "subtopics": [
+            { "id": "integration-test-containers", "title": "Integration Testing & Testcontainers", "description": "Spinning isolated DB containers, testing API routes", "keyConcepts": ["Supertest", "Testcontainers", "DB Seeding/Teardown"] }
+          ],
+          "resources": [
+            { "id": "res-be-test-1", "title": "Node.js Testing Best Practices", "type": "article", "url": "https://github.com/goldbergyoni/javascript-testing-best-practices", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-be-test-1", "title": "API Integration Test", "type": "coding-task", "prompt": "Write an end-to-end integration test verifying user signup, token generation, and authenticated endpoint request." }
+          ]
+        },
+        {
+          "id": "api-security",
+          "moduleId": "mod-5",
+          "title": "API Security",
+          "description": "OWASP API Top 10, input sanitization, rate limiting, SQL injection, XSS, CSRF, and security headers (Helmet).",
+          "subtopics": [
+            { "id": "owasp-api-top-10", "title": "OWASP API Top 10 & Sanitization", "description": "BOLA/IDOR, injection attacks, rate limiting", "keyConcepts": ["BOLA/IDOR", "SQL Injection", "Zod Validation", "Helmet JS"] }
+          ],
+          "resources": [
+            { "id": "res-sec-1", "title": "OWASP API Security Top 10", "type": "article", "url": "https://owasp.org/www-project-api-security/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-sec-1", "title": "Mitigating BOLA / IDOR Vulnerability", "type": "debugging-task", "prompt": "Identify why an API route `/api/orders/:id` allows any user to read other users' orders and fix it." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-6",
+      "number": 6,
+      "title": "Databases",
+      "description": "Master relational database design, SQL, PostgreSQL, indexing, transaction isolation levels, and NoSQL datastores.",
+      "category": "Databases",
+      "topics": [
+        {
+          "id": "sql",
+          "moduleId": "mod-6",
+          "title": "SQL",
+          "description": "Joins, subqueries, CTEs, window functions, aggregation, and query execution order.",
+          "subtopics": [
+            { "id": "sql-window-functions", "title": "SQL Window Functions & CTEs", "description": "ROW_NUMBER, RANK, PARTITION BY, recursive CTEs", "keyConcepts": ["PARTITION BY", "Recursive CTE", "Window Frame"] }
+          ],
+          "resources": [
+            { "id": "res-sql-1", "title": "SQLBolt - Interactive SQL Tutorials", "type": "course", "url": "https://sqlbolt.com/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-sql-1", "title": "Top 3 Highest Sales per Category", "type": "coding-task", "prompt": "Write a SQL query using `DENSE_RANK() OVER (PARTITION BY category ORDER BY sales DESC)`." }
+          ]
+        },
+        {
+          "id": "postgresql",
+          "moduleId": "mod-6",
+          "title": "PostgreSQL",
+          "description": "Postgres architecture, MVCC, VACUUM, JSONB, connection pooling (PgBouncer), and extensions.",
+          "subtopics": [
+            { "id": "postgres-mvcc", "title": "Postgres MVCC & Vacuuming", "description": "Multi-Version Concurrency Control, bloat, autovacuum", "keyConcepts": ["MVCC", "Dead Tuples", "Autovacuum", "PgBouncer"] }
+          ],
+          "resources": [
+            { "id": "res-pg-1", "title": "PostgreSQL Official Documentation", "type": "documentation", "url": "https://www.postgresql.org/docs/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-pg-1", "title": "JSONB Indexing in Postgres", "type": "concept-question", "prompt": "How do GIN indexes speed up queries on nested JSONB columns in PostgreSQL?" }
+          ]
+        },
+        {
+          "id": "database-design",
+          "moduleId": "mod-6",
+          "title": "Database Design",
+          "description": "Entity-Relationship modeling, normalization (1NF to 3NF), denormalization trade-offs, and foreign keys.",
+          "subtopics": [
+            { "id": "normalization-schema", "title": "Normalization & Schema Modeling", "description": "Functional dependencies, 3NF, surrogate vs natural keys", "keyConcepts": ["1NF/2NF/3NF", "Foreign Key Constraints", "Denormalization"] }
+          ],
+          "resources": [
+            { "id": "res-dbd-1", "title": "Database Design Normalization Guide", "type": "article", "url": "https://www.guru99.com/database-normalization.html", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-dbd-1", "title": "E-Commerce Database Schema", "type": "coding-task", "prompt": "Design a normalized PostgreSQL schema for users, products, orders, items, and inventory." }
+          ]
+        },
+        {
+          "id": "indexing-query-optimization",
+          "moduleId": "mod-6",
+          "title": "Indexing & Query Optimization",
+          "description": "B-Tree indexes, Hash indexes, GIN/GiST, composite indexes, EXPLAIN ANALYZE, and index scans.",
+          "subtopics": [
+            { "id": "explain-analyze-btree", "title": "EXPLAIN ANALYZE & B-Tree Indexing", "description": "Sequential scan vs index scan, composite index column order", "keyConcepts": ["EXPLAIN ANALYZE", "B-Tree Index", "Composite Index Order", "Covering Index"] }
+          ],
+          "resources": [
+            { "id": "res-idx-1", "title": "Use The Index, Luke!", "type": "book", "url": "https://use-the-index-luke.com/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-idx-1", "title": "Fixing Slow Query with Composite Index", "type": "debugging-task", "prompt": "Analyze an EXPLAIN output showing a sequential scan and select optimal index column ordering." }
+          ]
+        },
+        {
+          "id": "transactions",
+          "moduleId": "mod-6",
+          "title": "Transactions",
+          "description": "ACID properties, isolation levels (Read Committed, Repeatable Read, Serializable), locking, and deadlocks.",
+          "subtopics": [
+            { "id": "acid-isolation", "title": "ACID & Transaction Isolation Levels", "description": "Dirty read, non-repeatable read, phantom read, serialization anomaly", "keyConcepts": ["ACID", "Phantom Read", "Serializable Isolation", "Row-Level Locking"] }
+          ],
+          "resources": [
+            { "id": "res-tx-1", "title": "Postgres Transaction Isolation Docs", "type": "documentation", "url": "https://www.postgresql.org/docs/current/transaction-iso.html", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-tx-1", "title": "Resolving Deadlock in Concurrent Transfers", "type": "debugging-task", "prompt": "Identify why two concurrent bank transfer transactions cause a database deadlock and fix the lock acquisition order." }
+          ]
+        },
+        {
+          "id": "nosql-fundamentals",
+          "moduleId": "mod-6",
+          "title": "NoSQL Fundamentals",
+          "description": "Key-value stores (Redis), Document stores (MongoDB), Columnar (Cassandra), and search engines (Elasticsearch).",
+          "subtopics": [
+            { "id": "redis-mongodb", "title": "Redis & MongoDB Patterns", "description": "Redis data structures, cache eviction policies, MongoDB document validation", "keyConcepts": ["Redis Data Structures", "Cache Eviction (LRU)", "Document Embedding vs Referencing"] }
+          ],
+          "resources": [
+            { "id": "res-nosql-1", "title": "Redis University", "type": "course", "url": "https://university.redis.io/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-nosql-1", "title": "Redis Rate Limiter", "type": "coding-task", "prompt": "Implement a sliding window rate limiter in Node.js using Redis sorted sets (ZSET)." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-7",
+      "number": 7,
+      "title": "Full-Stack Engineering",
+      "description": "Integrate frontend and backend into unified production apps: auth flows, file upload pipelines, WebSockets, and real-time architectures.",
+      "category": "Full-Stack",
+      "topics": [
+        {
+          "id": "frontend-backend-integration",
+          "moduleId": "mod-7",
+          "title": "Frontend + Backend Integration",
+          "description": "Shared TypeScript types, API contract validation (Zod), tRPC/REST client generators, error boundaries.",
+          "subtopics": [
+            { "id": "end-to-end-typesafety", "title": "End-to-End Type Safety & Contracts", "description": "Sharing Zod schemas between client and server", "keyConcepts": ["Zod Schema Sharing", "API Contract Validation", "Type-Safe Fetch"] }
+          ],
+          "resources": [
+            { "id": "res-fs-1", "title": "Zod Documentation", "type": "documentation", "url": "https://zod.dev/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-fs-1", "title": "Type-Safe Client API Wrapper", "type": "coding-task", "prompt": "Create an API client wrapper that validates incoming JSON responses against Zod schemas before returning data." }
+          ]
+        },
+        {
+          "id": "authentication-systems",
+          "moduleId": "mod-7",
+          "title": "Authentication Systems",
+          "description": "End-to-end auth: httpOnly session cookies, OAuth social logins, MFA/2FA, and password hashing (argon2/bcrypt).",
+          "subtopics": [
+            { "id": "secure-auth-flow", "title": "Production Auth Flow & Session Management", "description": "CSRF double-submit cookies, argon2 hashing, session revocation", "keyConcepts": ["Argon2 Password Hashing", "HttpOnly Cookie Storage", "CSRF Protection"] }
+          ],
+          "resources": [
+            { "id": "res-auth-sys-1", "title": "OWASP Authentication Cheat Sheet", "type": "article", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-auth-sys-1", "title": "Full-Stack Cookie Auth", "type": "coding-task", "prompt": "Build an authenticated session check hook in React that automatically triggers refresh token rotation." }
+          ]
+        },
+        {
+          "id": "file-uploads",
+          "moduleId": "mod-7",
+          "title": "File Uploads",
+          "description": "S3 presigned URLs, multipart uploads, image resizing pipelines, MIME validation, and virus scanning.",
+          "subtopics": [
+            { "id": "s3-presigned-urls", "title": "Direct S3 Uploads via Presigned URLs", "description": "Bypassing app server for large uploads, CORS, MIME validation", "keyConcepts": ["S3 Presigned PUT", "MIME Type Magic Numbers", "Multipart Upload"] }
+          ],
+          "resources": [
+            { "id": "res-upload-1", "title": "AWS S3 Presigned URLs Guide", "type": "documentation", "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-upload-1", "title": "Presigned Upload Endpoint", "type": "coding-task", "prompt": "Write a backend endpoint that generates an S3 presigned upload URL and saves metadata to DB." }
+          ]
+        },
+        {
+          "id": "real-time-systems",
+          "moduleId": "mod-7",
+          "title": "Real-Time Systems",
+          "description": "WebSockets (Socket.IO), Server-Sent Events (SSE), HTTP Long Polling, and Redis Pub/Sub scale out.",
+          "subtopics": [
+            { "id": "websockets-redis-pubsub", "title": "WebSockets & Redis Adapter Scaling", "description": "Heartbeats, reconnection logic, scaling WebSockets across multiple nodes with Redis Pub/Sub", "keyConcepts": ["WebSocket Handshake", "Heartbeat Ping/Pong", "Redis Pub/Sub Adapter"] }
+          ],
+          "resources": [
+            { "id": "res-rt-1", "title": "Socket.IO Documentation", "type": "documentation", "url": "https://socket.io/docs/v4/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-rt-1", "title": "Real-Time Notification Server", "type": "coding-task", "prompt": "Build a real-time event broadcaster in Node.js using WebSockets and Redis Pub/Sub." }
+          ]
+        },
+        {
+          "id": "production-application-architecture",
+          "moduleId": "mod-7",
+          "title": "Production Application Architecture",
+          "description": "Monorepo structure (Turborepo), environment configuration, health checks, graceful shutdown, and containerization.",
+          "subtopics": [
+            { "id": "graceful-shutdown-monorepo", "title": "Graceful Shutdown & Health Checks", "description": "SIGTERM handling, closing DB pools, liveness/readiness probes", "keyConcepts": ["SIGTERM Listener", "Connection Draining", "Kubernetes Liveness Probe"] }
+          ],
+          "resources": [
+            { "id": "res-prod-1", "title": "The Twelve-Factor App", "type": "article", "url": "https://12factor.net/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-prod-1", "title": "Node.js Graceful Shutdown Script", "type": "coding-task", "prompt": "Write a graceful shutdown handler that stops accepting requests and closes DB pools on SIGINT/SIGTERM." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-8",
+      "number": 8,
+      "title": "Software Engineering",
+      "description": "Master durable engineering practices: Clean Code, SOLID principles, design patterns, testing strategies, code review, and refactoring.",
+      "category": "Software Engineering",
+      "topics": [
+        {
+          "id": "clean-code",
+          "moduleId": "mod-8",
+          "title": "Clean Code",
+          "description": "Meaningful names, small focused functions, command-query separation, side effects, and defensive programming.",
+          "subtopics": [
+            { "id": "clean-code-rules", "title": "Clean Code Rules & Function Specs", "description": "Single level of abstraction, avoiding magic numbers", "keyConcepts": ["Command-Query Separation", "Single Level of Abstraction", "Defensive Programming"] }
+          ],
+          "resources": [
+            { "id": "res-clean-1", "title": "Clean Code by Robert C. Martin", "type": "book", "url": "https://www.oreilly.com/library/view/clean-code-a/9780136083238/", "isFree": false }
+          ],
+          "practiceExercises": [
+            { "id": "prac-clean-1", "title": "Refactoring Nested Conditional Code", "type": "coding-task", "prompt": "Refactor a 5-level deeply nested if/else function into guard clauses." }
+          ]
+        },
+        {
+          "id": "solid-principles",
+          "moduleId": "mod-8",
+          "title": "SOLID Principles",
+          "description": "Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion.",
+          "subtopics": [
+            { "id": "solid-breakdown", "title": "SOLID Principles in TypeScript", "description": "SRP, OCP, LSP, ISP, DIP with concrete code examples", "keyConcepts": ["Single Responsibility", "Open/Closed Principle", "Dependency Inversion"] }
+          ],
+          "resources": [
+            { "id": "res-solid-1", "title": "SOLID Principles Explained", "type": "article", "url": "https://freecodecamp.org/news/solid-principles-explained-in-plain-english/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-solid-1", "title": "Applying Dependency Inversion", "type": "coding-task", "prompt": "Refactor a direct file system logger into an ILogger interface injected via constructor." }
+          ]
+        },
+        {
+          "id": "design-patterns",
+          "moduleId": "mod-8",
+          "title": "Design Patterns",
+          "description": "Creational (Factory, Singleton, Builder), Structural (Adapter, Decorator, Proxy), Behavioral (Strategy, Observer, Command).",
+          "subtopics": [
+            { "id": "gof-patterns", "title": "GoF Design Patterns in Production", "description": "Strategy pattern for payments, Factory pattern for notification dispatch", "keyConcepts": ["Factory Method", "Adapter Pattern", "Strategy Pattern"] }
+          ],
+          "resources": [
+            { "id": "res-pat-1", "title": "Design Patterns: Elements of Reusable Object-Oriented Software", "type": "book", "url": "https://www.oreilly.com/library/view/design-patterns-elements/0201633612/", "isFree": false }
+          ],
+          "practiceExercises": [
+            { "id": "prac-pat-1", "title": "Implement Strategy Pattern", "type": "coding-task", "prompt": "Implement a PaymentProcessor using the Strategy pattern supporting Stripe, PayPal, and Crypto." }
+          ]
+        },
+        {
+          "id": "testing-strategy",
+          "moduleId": "mod-8",
+          "title": "Testing Strategy",
+          "description": "Testing pyramid, Unit vs Integration vs E2E, AAA pattern (Arrange-Act-Assert), test doubles (mocks/stubs/spies).",
+          "subtopics": [
+            { "id": "test-pyramid-doubles", "title": "Test Pyramid & Test Doubles", "description": "Mocks vs Stubs vs Spies, test isolation", "keyConcepts": ["Testing Pyramid", "Mocks vs Stubs", "Arrange-Act-Assert"] }
+          ],
+          "resources": [
+            { "id": "res-tstr-1", "title": "Martin Fowler - Practical Test Pyramid", "type": "article", "url": "https://martinfowler.com/articles/practical-test-pyramid.html", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-tstr-1", "title": "Mocking Third-Party HTTP Client", "type": "coding-task", "prompt": "Write a unit test for an email sender service using stubs for the HTTP provider." }
+          ]
+        },
+        {
+          "id": "debugging",
+          "moduleId": "mod-8",
+          "title": "Debugging",
+          "description": "Systematic debugging methods, root cause analysis, binary search debugging (git bisect), memory dump analysis, profiling.",
+          "subtopics": [
+            { "id": "systematic-debugging", "title": "Root Cause Analysis & Heap Profiling", "description": "Reproducing issues, inspecting call stacks, analyzing memory leaks", "keyConcepts": ["Root Cause Analysis", "Heap Dump", "Git Bisect"] }
+          ],
+          "resources": [
+            { "id": "res-debug-1", "title": "Debugging: 9 Indispensable Rules", "type": "book", "url": "https://www.amazon.com/Debugging-Indispensable-Rules-Finding-Software/dp/0814471684", "isFree": false }
+          ],
+          "practiceExercises": [
+            { "id": "prac-debug-1", "title": "Find Memory Leak in Node.js", "type": "debugging-task", "prompt": "Analyze a memory graph showing unbounded array growth and pinpoint the uncleaned listener." }
+          ]
+        },
+        {
+          "id": "refactoring",
+          "moduleId": "mod-8",
+          "title": "Refactoring",
+          "description": "Code smells, refactoring catalog (Extract Method, Replace Conditional with Polymorphism), safely refactoring with test coverage.",
+          "subtopics": [
+            { "id": "code-smells-refactor", "title": "Identifying Code Smells & Safe Refactoring", "description": "Long methods, god objects, feature envy, primitive obsession", "keyConcepts": ["Code Smells", "God Object", "Primitive Obsession", "Extract Class"] }
+          ],
+          "resources": [
+            { "id": "res-ref-1", "title": "Refactoring by Martin Fowler", "type": "book", "url": "https://martinfowler.com/books/refactoring.html", "isFree": false }
+          ],
+          "practiceExercises": [
+            { "id": "prac-ref-1", "title": "Replace Conditional with Polymorphism", "type": "coding-task", "prompt": "Refactor a large switch statement determining user discount types into polymorphic class methods." }
+          ]
+        },
+        {
+          "id": "code-review",
+          "moduleId": "mod-8",
+          "title": "Code Review",
+          "description": "Conducting effective code reviews, automated linting, security checklist, design review, and reviewing AI-generated code.",
+          "subtopics": [
+            { "id": "code-review-ethics", "title": "Code Review Best Practices & AI Code Evaluation", "description": "Constructive feedback, spotting subtle AI hallucinations and edge cases", "keyConcepts": ["PR Review Checklist", "Evaluating AI-Generated Code", "Nitpicking vs Critical Issues"] }
+          ],
+          "resources": [
+            { "id": "res-cr-1", "title": "Google Engineering Practices - Code Review Developer Guide", "type": "article", "url": "https://google.github.io/eng-practices/review/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-cr-1", "title": "Reviewing Flawed PR", "type": "concept-question", "prompt": "Review a pull request submission and list security, performance, and correctness issues." }
+          ]
+        },
+        {
+          "id": "security",
+          "moduleId": "mod-8",
+          "title": "Security (Software)",
+          "description": "Secure coding practices, threat modeling, dependency vulnerability management (npm audit / Snyk), and secret management.",
+          "subtopics": [
+            { "id": "threat-modeling-secrets", "title": "Threat Modeling (STRIDE) & Secrets Management", "description": "Spoofing, Tampering, Information Disclosure, secret exposure prevention", "keyConcepts": ["STRIDE Threat Model", "Secrets Scanning", "Least Privilege"] }
+          ],
+          "resources": [
+            { "id": "res-sec-sw-1", "title": "OWASP Top 10 Web Application Security Risks", "type": "article", "url": "https://owasp.org/www-project-top-ten/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-sec-sw-1", "title": "Threat Model an Auth Endpoint", "type": "concept-question", "prompt": "Perform a STRIDE threat model analysis on a password reset token endpoint." }
+          ]
+        },
+        {
+          "id": "performance-optimization",
+          "moduleId": "mod-8",
+          "title": "Performance Optimization",
+          "description": "Profiling, bottleneck identification, memory allocation tuning, caching strategies, and benchmarking.",
+          "subtopics": [
+            { "id": "profiling-benchmarking", "title": "Profiling & Bottleneck Identification", "description": "Flame graphs, CPU profiling, microbenchmarking", "keyConcepts": ["Flame Graph", "CPU Profiling", "Microbenchmarks"] }
+          ],
+          "resources": [
+            { "id": "res-perf-opt-1", "title": "Node.js Performance & Profiling Guide", "type": "documentation", "url": "https://nodejs.org/en/docs/guides/simple-profiling/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-perf-opt-1", "title": "Optimize CPU-Bound Calculation", "type": "coding-task", "prompt": "Identify a CPU bottleneck in a loop using clinic.js / flame graphs and optimize time execution by 10x." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-9",
+      "number": 9,
+      "title": "DevOps & Cloud",
+      "description": "Deploy, containerize, and operate production applications: Docker, CI/CD pipelines, cloud infrastructure, and monitoring.",
+      "category": "DevOps",
+      "topics": [
+        {
+          "id": "linux-administration",
+          "moduleId": "mod-9",
+          "title": "Linux Administration",
+          "description": "Systemd services, journalctl logs, SSH security, firewall (ufw), swap memory, and cron jobs.",
+          "subtopics": [
+            { "id": "systemd-ssh", "title": "Systemd Services & Hardened SSH", "description": "Creating custom systemd service files, disabling root SSH login", "keyConcepts": ["Systemd Unit File", "SSH Key Hardening", "journalctl"] }
+          ],
+          "resources": [
+            { "id": "res-dev-linux-1", "title": "DigitalOcean Linux Basics", "type": "article", "url": "https://www.digitalocean.com/community/tutorials", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-dev-linux-1", "title": "Write a Systemd Service File", "type": "coding-task", "prompt": "Write a `/etc/systemd/system/myapp.service` unit file with automatic restart on failure." }
+          ]
+        },
+        {
+          "id": "docker",
+          "moduleId": "mod-9",
+          "title": "Docker",
+          "description": "Dockerfiles, multi-stage builds, layer caching, Docker Compose, networking, volume mounts, and non-root security.",
+          "subtopics": [
+            { "id": "dockerfile-multistage", "title": "Multi-Stage Dockerfiles & Small Images", "description": "Distroless images, layer caching, non-root user execution", "keyConcepts": ["Multi-Stage Build", "Docker Layer Cache", "Non-Root Container"] }
+          ],
+          "resources": [
+            { "id": "res-docker-1", "title": "Docker Official Documentation", "type": "documentation", "url": "https://docs.docker.com/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-docker-1", "title": "Production Node.js Dockerfile", "type": "coding-task", "prompt": "Write a multi-stage Dockerfile that builds a Node.js app into an alpine image under 100MB." }
+          ]
+        },
+        {
+          "id": "ci-cd",
+          "moduleId": "mod-9",
+          "title": "CI/CD",
+          "description": "GitHub Actions pipelines, automated linting, test matrices, Docker image build/push, and deployment triggers.",
+          "subtopics": [
+            { "id": "github-actions-pipeline", "title": "GitHub Actions Production Workflows", "description": "Build matrix, caching node_modules, secret injection, automated deployment", "keyConcepts": ["GitHub Workflow Syntax", "Matrix Strategy", "Action Cache"] }
+          ],
+          "resources": [
+            { "id": "res-cicd-1", "title": "GitHub Actions Documentation", "type": "documentation", "url": "https://docs.github.com/en/actions", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-cicd-1", "title": "GitHub Actions CI Pipeline", "type": "coding-task", "prompt": "Create a `.github/workflows/ci.yml` that runs lint, tests, and builds Docker images on PRs." }
+          ]
+        },
+        {
+          "id": "cloud-fundamentals",
+          "moduleId": "mod-9",
+          "title": "Cloud Fundamentals",
+          "description": "AWS/GCP core services: EC2/Compute Engine, S3/Cloud Storage, VPC, IAM roles, Security Groups, Serverless.",
+          "subtopics": [
+            { "id": "aws-iam-vpc", "title": "AWS IAM & VPC Networking", "description": "Principle of least privilege, public vs private subnets, security groups", "keyConcepts": ["IAM Policy", "Security Groups", "VPC Subnets", "NAT Gateway"] }
+          ],
+          "resources": [
+            { "id": "res-cloud-1", "title": "AWS Skill Builder Fundamentals", "type": "course", "url": "https://explore.skillbuilder.aws/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-cloud-1", "title": "IAM Least Privilege Policy", "type": "concept-question", "prompt": "Write a minimal JSON IAM policy that restricts S3 access to a single bucket name." }
+          ]
+        },
+        {
+          "id": "deployment",
+          "moduleId": "mod-9",
+          "title": "Deployment",
+          "description": "Zero-downtime deployment, Blue/Green, Canary deployments, Rolling updates, reverse proxies (Nginx/Caddy).",
+          "subtopics": [
+            { "id": "nginx-blue-green", "title": "Nginx Reverse Proxy & Blue-Green Strategy", "description": "Upstream configuration, SSL termination with Certbot, Blue-Green routing", "keyConcepts": ["Nginx Upstream", "SSL Termination", "Blue-Green Deployment"] }
+          ],
+          "resources": [
+            { "id": "res-deploy-1", "title": "Nginx Beginner's Guide", "type": "documentation", "url": "https://nginx.org/en/docs/beginners_guide.html", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-deploy-1", "title": "Nginx Reverse Proxy Config", "type": "coding-task", "prompt": "Write an Nginx configuration file proxying requests from port 80/443 to a local Node app on port 3000." }
+          ]
+        },
+        {
+          "id": "monitoring-logging",
+          "moduleId": "mod-9",
+          "title": "Monitoring & Logging",
+          "description": "Metrics (Prometheus), Dashboards (Grafana), Centralized Logging (Loki/ELK), alerting thresholds, and SLOs/SLAs.",
+          "subtopics": [
+            { "id": "prometheus-grafana", "title": "Prometheus Metrics & Grafana Alerting", "description": "Counter, Gauge, Histogram metrics, RED method (Rate, Errors, Duration)", "keyConcepts": ["Prometheus Metrics", "Histogram P99 Latency", "RED Method"] }
+          ],
+          "resources": [
+            { "id": "res-mon-1", "title": "Prometheus Official Overview", "type": "documentation", "url": "https://prometheus.io/docs/introduction/overview/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-mon-1", "title": "Exposing Prometheus HTTP Metrics", "type": "coding-task", "prompt": "Add a `/metrics` route in Node.js using `prom-client` to expose request duration histograms." }
+          ]
+        },
+        {
+          "id": "environment-secrets-management",
+          "moduleId": "mod-9",
+          "title": "Environment & Secrets Management",
+          "description": "Managing environment variables, Vault, AWS Secrets Manager, Doppler, secret injection into containers.",
+          "subtopics": [
+            { "id": "secrets-vault", "title": "Centralized Secrets Management", "description": "Avoiding hardcoded secrets, rotating API keys dynamically", "keyConcepts": ["Secrets Manager", "Dynamic Key Rotation", ".env Injection"] }
+          ],
+          "resources": [
+            { "id": "res-sec-mgr-1", "title": "HashiCorp Vault Documentation", "type": "documentation", "url": "https://developer.hashicorp.com/vault", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-sec-mgr-1", "title": "Preventing Secret Leaks in CI", "type": "concept-question", "prompt": "How do tools like git-leaks prevent accidental commits of API keys in repository history?" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-10",
+      "number": 10,
+      "title": "System Design",
+      "description": "Architect high-scale distributed systems: scalability, load balancing, caching, queues, database partitioning, and trade-offs.",
+      "category": "System Design",
+      "topics": [
+        {
+          "id": "scalability",
+          "moduleId": "mod-10",
+          "title": "Scalability",
+          "description": "Vertical vs Horizontal scaling, stateless servers, share-nothing architecture, back-of-the-envelope calculations.",
+          "subtopics": [
+            { "id": "stateless-scaling", "title": "Horizontal Scaling & Back-Of-Envelope Estimation", "description": "Estimating QPS, storage requirements, network bandwidth", "keyConcepts": ["QPS Estimation", "Stateless Architecture", "Storage Scale Calculation"] }
+          ],
+          "resources": [
+            { "id": "res-sd-scale-1", "title": "System Design Primer", "type": "article", "url": "https://github.com/donnemartin/system-design-primer", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-sd-scale-1", "title": "Calculate QPS & Storage for Photo App", "type": "concept-question", "prompt": "Estimate storage and bandwidth needed for 10 million daily active users uploading 2 photos (1MB each) per day." }
+          ]
+        },
+        {
+          "id": "load-balancing",
+          "moduleId": "mod-10",
+          "title": "Load Balancing",
+          "description": "Layer 4 vs Layer 7 load balancing, algorithms (Round Robin, Least Connections, Consistent Hashing), and health checks.",
+          "subtopics": [
+            { "id": "consistent-hashing", "title": "Consistent Hashing & L4/L7 Balancing", "description": "Hash ring, virtual nodes, minimizing key remapping during server additions", "keyConcepts": ["Consistent Hash Ring", "Virtual Nodes", "L4 vs L7 Proxy"] }
+          ],
+          "resources": [
+            { "id": "res-lb-1", "title": "HAProxy Architecture Manual", "type": "documentation", "url": "http://www.haproxy.org/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-lb-1", "title": "Consistent Hashing Node Addition", "type": "concept-question", "prompt": "Explain why adding a server node in consistent hashing only remaps 1/N keys." }
+          ]
+        },
+        {
+          "id": "caching",
+          "moduleId": "mod-10",
+          "title": "Caching",
+          "description": "Cache strategies (Cache-Aside, Write-Through, Write-Behind), CDN, cache invalidation, cache stampede, and dogpiling.",
+          "subtopics": [
+            { "id": "cache-patterns", "title": "Caching Patterns & Cache Stampede", "description": "Cache-aside pattern, mutex locking for cache misses, CDN edge caching", "keyConcepts": ["Cache-Aside", "Cache Stampede", "TTL Eviction", "CDN Edge"] }
+          ],
+          "resources": [
+            { "id": "res-cache-1", "title": "AWS Caching Best Practices", "type": "article", "url": "https://aws.amazon.com/caching/best-practices/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-cache-1", "title": "Mitigating Cache Stampede", "type": "coding-task", "prompt": "Write a cached function in Node.js using a mutex lock to prevent cache stampedes during expensive database queries." }
+          ]
+        },
+        {
+          "id": "queues",
+          "moduleId": "mod-10",
+          "title": "Queues & Messaging",
+          "description": "Message brokers (RabbitMQ, Kafka, SQS), publish-subscribe, dead-letter queues, idempotent consumers, and backpressure.",
+          "subtopics": [
+            { "id": "kafka-idempotent", "title": "Event-Driven Queues & Idempotent Consumers", "description": "At-least-once delivery, deduplication keys, dead letter queues", "keyConcepts": ["At-Least-Once Delivery", "Idempotency Key", "Dead Letter Queue", "Kafka Partitioning"] }
+          ],
+          "resources": [
+            { "id": "res-q-1", "title": "Designing Data-Intensive Applications (DDIA)", "type": "book", "url": "https://dataintensive.net/", "isFree": false }
+          ],
+          "practiceExercises": [
+            { "id": "prac-q-1", "title": "Designing an Idempotent Payment Consumer", "type": "concept-question", "prompt": "How do unique transaction reference IDs prevent double charging when a message is delivered twice?" }
+          ]
+        },
+        {
+          "id": "database-scaling",
+          "moduleId": "mod-10",
+          "title": "Database Scaling",
+          "description": "Read replicas, master-slave replication, horizontal sharding, sharding keys, and distributed transactions.",
+          "subtopics": [
+            { "id": "sharding-replication", "title": "Sharding Strategies & Read Replicas", "description": "Range vs Hash sharding, cross-shard joins, replication lag", "keyConcepts": ["Horizontal Sharding", "Shard Key Selection", "Replication Lag"] }
+          ],
+          "resources": [
+            { "id": "res-dbs-1", "title": "Distributed Systems & Database Scaling Guides", "type": "article", "url": "https://bytebytego.com/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-dbs-1", "title": "Selecting a Shard Key", "type": "concept-question", "prompt": "What happens if a poor shard key causes hot-spotting in a sharded database?" }
+          ]
+        },
+        {
+          "id": "distributed-systems",
+          "moduleId": "mod-10",
+          "title": "Distributed Systems",
+          "description": "CAP Theorem, PACELC, consensus algorithms (Raft, Paxos), vector clocks, and distributed locking.",
+          "subtopics": [
+            { "id": "cap-raft", "title": "CAP Theorem & Raft Consensus", "description": "Consistency vs Availability, leader election, log replication", "keyConcepts": ["CAP Theorem", "PACELC", "Raft Leader Election", "Split-Brain"] }
+          ],
+          "resources": [
+            { "id": "res-dist-1", "title": "The Raft Consensus Algorithm", "type": "article", "url": "https://raft.github.io/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-dist-1", "title": "PACELC Trade-Off in DynamoDB", "type": "concept-question", "prompt": "Explain the PACELC theorem and how it extends CAP theorem when systems are operating normally without partitions." }
+          ]
+        },
+        {
+          "id": "reliability",
+          "moduleId": "mod-10",
+          "title": "Reliability & Resiliency",
+          "description": "Circuit breaker pattern, retry exponential backoff with jitter, rate limiting, and graceful degradation.",
+          "subtopics": [
+            { "id": "circuit-breaker-jitter", "title": "Circuit Breakers & Exponential Backoff with Jitter", "description": "Preventing cascading failures, fallback responses", "keyConcepts": ["Circuit Breaker State Machine", "Exponential Backoff", "Full Jitter"] }
+          ],
+          "resources": [
+            { "id": "res-rel-1", "title": "AWS Architecture Blog - Exponential Backoff and Jitter", "type": "article", "url": "https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-rel-1", "title": "Implement Exponential Backoff with Jitter", "type": "coding-task", "prompt": "Write a retry utility function in TypeScript using exponential backoff and randomized jitter." }
+          ]
+        },
+        {
+          "id": "api-design",
+          "moduleId": "mod-10",
+          "title": "API Design (System Level)",
+          "description": "REST vs GraphQL vs gRPC (Protocol Buffers), Webhook design, idempotency headers, and API gateways.",
+          "subtopics": [
+            { "id": "grpc-graphql-rest", "title": "gRPC, Protobuf & API Gateway Design", "description": "Binary RPC over HTTP/2, GraphQL schema stitching, API Gateway routing", "keyConcepts": ["Protocol Buffers", "gRPC HTTP/2", "API Gateway", "Idempotency-Key Header"] }
+          ],
+          "resources": [
+            { "id": "res-apid-1", "title": "gRPC Documentation", "type": "documentation", "url": "https://grpc.io/docs/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-apid-1", "title": "Protobuf Schema Definition", "type": "coding-task", "prompt": "Write a `.proto` file defining a user service request/response struct for gRPC." }
+          ]
+        },
+        {
+          "id": "engineering-trade-offs",
+          "moduleId": "mod-10",
+          "title": "Engineering Trade-offs",
+          "description": "Evaluating complexity vs speed, cost vs performance, buy vs build, and technical debt management.",
+          "subtopics": [
+            { "id": "tradeoff-evaluation", "title": "Evaluating Architectural Trade-offs", "description": "Structured architecture decision records (ADR), cost analysis", "keyConcepts": ["Architecture Decision Record (ADR)", "Total Cost of Ownership", "Technical Debt"] }
+          ],
+          "resources": [
+            { "id": "res-to-1", "title": "Software Architecture in Practice", "type": "book", "url": "https://www.oreilly.com/library/view/software-architecture-in/9780136886099/", "isFree": false }
+          ],
+          "practiceExercises": [
+            { "id": "prac-to-1", "title": "Write an ADR for Database Migration", "type": "concept-question", "prompt": "Write an Architectural Decision Record (ADR) justifying migrating from REST to gRPC for microservices." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-11",
+      "number": 11,
+      "title": "AI-Augmented Engineering",
+      "description": "Leverage AI tools responsibly: prompting, AI debugging/testing, reviewing AI code, security risks, and knowing when NOT to use AI.",
+      "category": "AI Engineering",
+      "topics": [
+        {
+          "id": "ai-coding-assistants",
+          "moduleId": "mod-11",
+          "title": "AI Coding Assistants",
+          "description": "Copilot, Claude, Gemini CLI workflows, prompt context windows, project rules, and AI integration boundaries.",
+          "subtopics": [
+            { "id": "ai-tooling-workflow", "title": "AI Tooling & Context Management", "description": "Providing localized repo context, system prompts, managing token limits", "keyConcepts": ["Context Window", "System Prompts", "AI Pair Programming"] }
+          ],
+          "resources": [
+            { "id": "res-ai-tool-1", "title": "GitHub Copilot Documentation", "type": "documentation", "url": "https://docs.github.com/en/copilot", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-ai-tool-1", "title": "Crafting High-Context AI Prompt", "type": "concept-question", "prompt": "Draft a structured prompt providing interface definitions, constraints, and expected output format for an AI model." }
+          ]
+        },
+        {
+          "id": "prompting-for-software-development",
+          "moduleId": "mod-11",
+          "title": "Prompting for Software Development",
+          "description": "Structured prompts, Few-Shot prompting, Chain-of-Thought reasoning, JSON schemas, and system prompt engineering.",
+          "subtopics": [
+            { "id": "chain-of-thought-json", "title": "Chain-of-Thought & Structured Outputs", "description": "Forcing structured JSON schemas, enforcing reasoning steps before output", "keyConcepts": ["Chain-of-Thought", "JSON Schema Enforcement", "Few-Shot Prompting"] }
+          ],
+          "resources": [
+            { "id": "res-prompt-1", "title": "Anthropic Prompt Engineering Interactive Guide", "type": "article", "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-prompt-1", "title": "Zero-Shot vs Few-Shot Prompt Comparison", "type": "concept-question", "prompt": "Compare results when generating TypeScript type definitions with zero-shot vs 2-shot prompts." }
+          ]
+        },
+        {
+          "id": "ai-assisted-debugging",
+          "moduleId": "mod-11",
+          "title": "AI-Assisted Debugging",
+          "description": "Feeding stack traces, environment details, and minimal reproduction snippets into LLMs to isolate bugs.",
+          "subtopics": [
+            { "id": "ai-debug-workflow", "title": "Root-Cause Analysis via AI", "description": "Filtering noise from logs, providing precise context without leaking keys", "keyConcepts": ["Log Sanitization", "Minimal Reproducible Example", "Iterative Prompt Debugging"] }
+          ],
+          "resources": [
+            { "id": "res-ai-deb-1", "title": "AI-Assisted Software Debugging Patterns", "type": "article", "url": "https://simonwillison.net/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-ai-deb-1", "title": "Isolating Stack Trace with AI", "type": "debugging-task", "prompt": "Sanitize a production stack trace containing sensitive keys and craft a prompt for an AI debugger." }
+          ]
+        },
+        {
+          "id": "ai-assisted-testing",
+          "moduleId": "mod-11",
+          "title": "AI-Assisted Testing",
+          "description": "Using AI to generate unit tests, boundary test cases, mock data generators, and regression suites.",
+          "subtopics": [
+            { "id": "ai-test-generation", "title": "Generating Unit & Edge-Case Tests", "description": "Prompting for unexpected nulls, boundary values, and negative test cases", "keyConcepts": ["Edge-Case Test Generation", "Mock Data Factories", "Negative Testing"] }
+          ],
+          "resources": [
+            { "id": "res-ai-test-1", "title": "Generating Test Suites with LLMs", "type": "article", "url": "https://martinfowler.com/articles/llm-testing.html", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-ai-test-1", "title": "Generate Edge Case Tests for Function", "type": "coding-task", "prompt": "Prompt an AI model to generate 10 edge-case tests for a date calculation function." }
+          ]
+        },
+        {
+          "id": "ai-code-review",
+          "moduleId": "mod-11",
+          "title": "AI Code Review",
+          "description": "Automating initial PR reviews with AI: checking syntax, missing error handlers, security vulnerabilities, and code style.",
+          "subtopics": [
+            { "id": "ai-pr-bot-review", "title": "AI Code Review Bots & Security Auditing", "description": "Setting severity thresholds, preventing false positives, automated PR feedback", "keyConcepts": ["AI Code Review Pipeline", "False Positive Filtering", "Severity Rating"] }
+          ],
+          "resources": [
+            { "id": "res-ai-cr-1", "title": "AI-Assisted Code Review Best Practices", "type": "article", "url": "https://github.blog/2023-06-20-how-to-use-ai-code-reviews/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-ai-cr-1", "title": "Evaluating AI PR Reviewer Output", "type": "concept-question", "prompt": "Identify valid security feedback vs false positives from an AI code review output." }
+          ]
+        },
+        {
+          "id": "ai-assisted-architecture",
+          "moduleId": "mod-11",
+          "title": "AI-Assisted Architecture",
+          "description": "Using LLMs for high-level architectural brainstorming, trade-off comparisons, and writing technical design documents.",
+          "subtopics": [
+            { "id": "ai-system-brainstorming", "title": "Architectural Design Brainstorming with AI", "description": "Generating ADR templates, comparing cloud services, analyzing bottlenecks", "keyConcepts": ["ADR Generation", "AI Trade-Off Analysis", "Design Doc Review"] }
+          ],
+          "resources": [
+            { "id": "res-ai-arch-1", "title": "Architecting Systems with LLMs", "type": "article", "url": "https://eugeneyan.com/writing/llm-patterns/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-ai-arch-1", "title": "Generate System Design Options", "type": "concept-question", "prompt": "Prompt AI to generate 3 alternative database architecture options for a high-frequency trading platform." }
+          ]
+        },
+        {
+          "id": "evaluating-ai-generated-code",
+          "moduleId": "mod-11",
+          "title": "Evaluating AI-Generated Code",
+          "description": "Detecting silent bugs, hallucinations, subtle off-by-one errors, outdated package calls, and improper assumptions in AI code.",
+          "subtopics": [
+            { "id": "ai-hallucinations-bugs", "title": "Detecting Hallucinations & Subtle Bugs", "description": "Verifying API package imports exist, checking edge-case memory bounds", "keyConcepts": ["Package Hallucination", "Silent Algorithmic Failure", "Verification Mindset"] }
+          ],
+          "resources": [
+            { "id": "res-eval-ai-1", "title": "The Risks of Blindly Trusting AI Code", "type": "article", "url": "https://hackernoon.com/evaluating-ai-generated-code", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-eval-ai-1", "title": "Spotting Hallucinated API Methods", "type": "debugging-task", "prompt": "Examine AI-generated code using non-existent SDK parameters and fix it." }
+          ]
+        },
+        {
+          "id": "security-risks-ai-code",
+          "moduleId": "mod-11",
+          "title": "Security Risks of AI-Generated Code",
+          "description": "Prompt injection, data leakage via LLM prompts, insecure AI-generated code snippets (hardcoded secrets, SQLi).",
+          "subtopics": [
+            { "id": "prompt-injection-data-leakage", "title": "Prompt Injection & Secret Leakage Risks", "description": "Indirect prompt injection, sanitizing code before sending to cloud LLMs", "keyConcepts": ["Indirect Prompt Injection", "Data Privacy", "Insecure AI Defaults"] }
+          ],
+          "resources": [
+            { "id": "res-sec-ai-1", "title": "OWASP Top 10 for LLM Applications", "type": "article", "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-sec-ai-1", "title": "Preventing Indirect Prompt Injection", "type": "concept-question", "prompt": "Explain how an attacker can manipulate an AI assistant by injecting malicious text into a parsed PDF/webpage." }
+          ]
+        },
+        {
+          "id": "knowing-when-not-to-use-ai",
+          "moduleId": "mod-11",
+          "title": "Knowing When Not to Use AI",
+          "description": "Recognizing when AI causes over-complication, security leaks, regulatory violations, or prevents core learning mastery.",
+          "subtopics": [
+            { "id": "responsible-ai-boundaries", "title": "Responsible AI & Engineering Mastery Boundaries", "description": "When to write code from scratch to build mental models and deep intuition", "keyConcepts": ["First-Principles Intuition", "Compliance & IP Risks", "Over-Reliance Risks"] }
+          ],
+          "resources": [
+            { "id": "res-no-ai-1", "title": "Pragmatic Engineering with AI", "type": "article", "url": "https://newsletter.pragmaticengineer.com/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-no-ai-1", "title": "AI Trade-Off Case Study", "type": "concept-question", "prompt": "Identify 3 scenarios in a fintech payment system where AI code generation must be strictly prohibited." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mod-12",
+      "number": 12,
+      "title": "Interview & Career Readiness",
+      "description": "Prepare for elite tech interviews across all surfaces: DSA, CS fundamentals, Frontend/Backend, SQL, System Design, and Behavioral loops.",
+      "category": "Interview Prep",
+      "topics": [
+        {
+          "id": "dsa-interviews",
+          "moduleId": "mod-12",
+          "title": "DSA Interviews",
+          "description": "Solving medium/hard coding problems under pressure, communicating algorithmic trade-offs, and clean execution.",
+          "subtopics": [
+            { "id": "dsa-interview-communication", "title": "Thinking Out Loud & Solving DSA Problems", "description": "Clarifying constraints, proposing brute force, optimizing, writing bug-free code", "keyConcepts": ["Constraint Clarification", "Proposing Trade-offs", "Dry Running Code"] }
+          ],
+          "resources": [
+            { "id": "res-dsa-int-1", "title": "Cracking the Coding Interview", "type": "book", "url": "https://www.crackingthecodinginterview.com/", "isFree": false }
+          ],
+          "practiceExercises": [
+            { "id": "prac-dsa-int-1", "title": "Timed Coding Problem Simulation", "type": "coding-task", "prompt": "Solve LRU Cache in 20 minutes with written time/space complexity proof." }
+          ]
+        },
+        {
+          "id": "cs-fundamentals-interviews",
+          "moduleId": "mod-12",
+          "title": "CS Fundamentals (Interviews)",
+          "description": "Answering rapid-fire CS questions on OS, processes vs threads, memory, TCP/IP, and HTTP.",
+          "subtopics": [
+            { "id": "cs-rapid-fire", "title": "CS Rapid-Fire Question Mastery", "description": "Delivering 60-second precise answers to core CS concepts", "keyConcepts": ["Elevator Pitch Explanation", "Precise Technical Jargon", "Core Abstractions"] }
+          ],
+          "resources": [
+            { "id": "res-cs-int-1", "title": "Technical Interview Readiness Checklist", "type": "article", "url": "https://github.com/jwasham/coding-interview-university", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-cs-int-1", "title": "Explain TCP vs UDP", "type": "concept-question", "prompt": "Give a 60-second interview response explaining when to choose TCP vs UDP." }
+          ]
+        },
+        {
+          "id": "frontend-interviews",
+          "moduleId": "mod-12",
+          "title": "Frontend Interviews",
+          "description": "React internals, JavaScript event loop, DOM performance, CSS layout challenges, and building UI widgets live.",
+          "subtopics": [
+            { "id": "fe-live-coding", "title": "Frontend Machine Coding & Architecture", "description": "Building autocomplete dropdowns, virtualized lists, or kanban boards live", "keyConcepts": ["Machine Coding Round", "Debounce/Throttle", "DOM Manipulation"] }
+          ],
+          "resources": [
+            { "id": "res-fe-int-1", "title": "GreatFrontEnd Interview Guide", "type": "course", "url": "https://www.greatfrontend.com/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-fe-int-1", "title": "Build Autocomplete Search Widget", "type": "coding-task", "prompt": "Build an autocomplete search widget with debouncing, keyboard navigation, and ARIA attributes." }
+          ]
+        },
+        {
+          "id": "backend-interviews",
+          "moduleId": "mod-12",
+          "title": "Backend Interviews",
+          "description": "Designing RESTful APIs live, database schema modeling, authentication middleware, and concurrency bugs.",
+          "subtopics": [
+            { "id": "be-live-design", "title": "Backend Machine Coding & API Design", "description": "Writing production-grade Node.js/Express API with DB integration in 45 minutes", "keyConcepts": ["API Endpoint Structure", "Input Validation Middleware", "Error Code Standards"] }
+          ],
+          "resources": [
+            { "id": "res-be-int-1", "title": "Backend Interview Questions & Answers", "type": "article", "url": "https://github.com/alex/what-happens-when", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-be-int-1", "title": "Build Rate-Limited API Route", "type": "coding-task", "prompt": "Build an API route with token bucket rate limiting and custom response headers." }
+          ]
+        },
+        {
+          "id": "sql-interviews",
+          "moduleId": "mod-12",
+          "title": "SQL Interviews",
+          "description": "Writing complex joins, window functions, aggregation, and query optimization live under interview conditions.",
+          "subtopics": [
+            { "id": "sql-live-queries", "title": "Live SQL Query Coding", "description": "Solving medium to hard SQL interview challenges on dynamic datasets", "keyConcepts": ["Complex Joins", "Aggregations with HAVING", "Window Functions"] }
+          ],
+          "resources": [
+            { "id": "res-sql-int-1", "title": "LeetCode Database Questions", "type": "course", "url": "https://leetcode.com/problemset/database/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-sql-int-1", "title": "Monthly Active Users Growth SQL", "type": "coding-task", "prompt": "Write a query calculating month-over-month active user growth percentage." }
+          ]
+        },
+        {
+          "id": "system-design-interviews",
+          "moduleId": "mod-12",
+          "title": "System Design Interviews",
+          "description": "Structuring 45-minute system design interviews: requirements, estimates, API, data model, deep dive, and trade-offs.",
+          "subtopics": [
+            { "id": "sd-45-min-framework", "title": "45-Minute System Design Framework", "description": "Requirement gathering, high-level architecture diagramming, scaling bottlenecks", "keyConcepts": ["System Design Blueprint", "Functional/Non-Functional Specs", "Single Point of Failure"] }
+          ],
+          "resources": [
+            { "id": "res-sdi-1", "title": "System Design Interview – An Insider's Guide by Alex Xu", "type": "book", "url": "https://bytebytego.com/", "isFree": false }
+          ],
+          "practiceExercises": [
+            { "id": "prac-sdi-1", "title": "Design URL Shortener (TinyURL)", "type": "concept-question", "prompt": "Design TinyURL covering hashing algorithm, base62 encoding, database choice, and cache strategy." }
+          ]
+        },
+        {
+          "id": "project-deep-dive",
+          "moduleId": "mod-12",
+          "title": "Project Deep-Dive",
+          "description": "Articulating complex project architecture, technical challenges solved, performance metrics, and trade-offs made.",
+          "subtopics": [
+            { "id": "project-storytelling", "title": "Technical Project Storytelling", "description": "Structuring project presentations: Problem → Constraints → Architecture → Results → Lessons", "keyConcepts": ["Architecture Presentation", "Technical Trade-offs", "Quantified Impact"] }
+          ],
+          "resources": [
+            { "id": "res-pdd-1", "title": "How to Talk About Your Projects in Engineering Interviews", "type": "article", "url": "https://careercup.com/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-pdd-1", "title": "Crafting 3-Minute Project Summary", "type": "concept-question", "prompt": "Draft a 3-minute technical summary of your most complex project highlighting architectural trade-offs." }
+          ]
+        },
+        {
+          "id": "behavioral-interviews",
+          "moduleId": "mod-12",
+          "title": "Behavioral Interviews",
+          "description": "STAR method (Situation, Task, Action, Result) for conflict resolution, technical failures, leadership, and feedback.",
+          "subtopics": [
+            { "id": "star-framework", "title": "STAR Method & Behavioral Competency", "description": "Formulating 2-minute concise STAR stories highlighting personal ownership", "keyConcepts": ["STAR Method", "Technical Conflict Resolution", "Postmortem / Failure Story"] }
+          ],
+          "resources": [
+            { "id": "res-beh-1", "title": "Amazon Leadership Principles & STAR Method", "type": "article", "url": "https://www.amazon.jobs/en/principles", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-beh-1", "title": "STAR Story for Outage / Failure", "type": "concept-question", "prompt": "Draft a STAR response describing a production outage you caused and how you handled postmortem remediations." }
+          ]
+        },
+        {
+          "id": "mock-interviews",
+          "moduleId": "mod-12",
+          "title": "Mock Interviews",
+          "description": "Full end-to-end simulated mock interview loops with live AI feedback across coding, design, and behavioral domains.",
+          "subtopics": [
+            { "id": "full-mock-loop", "title": "Full Mock Loop Simulation & Feedback Integration", "description": "Simulating full 45-minute rounds and integrating feedback into revision plans", "keyConcepts": ["Time Management", "Pressure Handling", "Feedback Loop Integration"] }
+          ],
+          "resources": [
+            { "id": "res-mock-1", "title": "Pramp / Interviewing.io Mock Interviews", "type": "course", "url": "https://interviewing.io/", "isFree": true }
+          ],
+          "practiceExercises": [
+            { "id": "prac-mock-1", "title": "Mock Interview Self-Evaluation", "type": "concept-question", "prompt": "Conduct a mock interview session with AI Interviewer and summarize 3 concrete improvements." }
+          ]
+        }
+      ]
+    }
+  ]
+}
