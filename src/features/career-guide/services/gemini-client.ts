@@ -36,32 +36,17 @@ interface CallGeminiOptions {
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function getGeminiApiKey(): string {
-  let key = "";
-
-  // 1. Try import.meta.env (Vite client & server side)
-  try {
-    if (typeof import.meta !== "undefined" && import.meta.env) {
-      key = import.meta.env.GEMINI_API_KEY || import.meta.env.VITE_GEMINI_API_KEY || "";
-    }
-  } catch (e) {}
-
-  // 2. Try process.env (Node.js runtime server functions)
-  if (!key) {
-    try {
-      if (typeof process !== "undefined" && process.env) {
-        key = process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY || "";
-      }
-    } catch (e) {}
+  if (typeof process !== "undefined" && process.env) {
+    return process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY || "";
   }
-
-  return key;
+  return "";
 }
 
 export async function callGeminiWithModelFallback(options: CallGeminiOptions): Promise<string> {
   const apiKey = getGeminiApiKey();
 
   if (!apiKey) {
-    throw new Error("Gemini API key is missing. Please ensure GEMINI_API_KEY or VITE_GEMINI_API_KEY is configured in your .env file.");
+    throw new Error("Gemini API key is missing. Please ensure server environment key is configured.");
   }
 
   const modelList = MODEL_CHAINS[options.taskType] || MODEL_CHAINS.heavy;
@@ -109,14 +94,12 @@ export async function callGeminiWithModelFallback(options: CallGeminiOptions): P
         lastErrorMessage = `Gemini ${modelName} returned HTTP ${status}: ${errorText.substring(0, 150)}`;
         console.warn(`[Gemini Attempt ${attempt} on ${modelName}] HTTP ${status}: ${errorText.substring(0, 120)}`);
 
-        // If HTTP 503 (high demand) or 429 (rate limit), pause with exponential backoff before retry
         if (status === 503 || status === 429) {
           if (attempt < maxRetries) {
-            await delay(attempt * 1000); // 1s, 2s, 3s backoff
+            await delay(attempt * 1000);
             continue;
           }
         } else {
-          // If 404 or non-retriable, move directly to next model in fallback chain
           break;
         }
       } catch (err: any) {

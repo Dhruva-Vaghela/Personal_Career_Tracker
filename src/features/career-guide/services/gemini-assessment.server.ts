@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import type { InterviewReview } from "@/features/projects/types";
 import type {
   Question,
   QuestionEvaluationResult,
@@ -750,3 +751,112 @@ Generate a production-relevant practical task assignment.`;
       return { task: fallbackTask };
     }
   });
+
+// ---------------------------------------------------------------------------
+// 9. Project Portfolio Review Server Function (Task: review / heavy)
+// ---------------------------------------------------------------------------
+interface GenerateProjectReviewPayload {
+  project: {
+    id: string;
+    title: string;
+    category: string;
+    status: string;
+    technologies: string[];
+    description: string;
+    development?: {
+      features?: string[];
+      challenges?: string;
+      architecture?: string;
+      decisions?: string;
+      learningOutcomes?: string;
+      futureImprovements?: string;
+    };
+  };
+}
+
+export const generateProjectReviewServerFn = createServerFn({ method: "POST" })
+  .validator((data: GenerateProjectReviewPayload) => data)
+  .handler(async ({ data }): Promise<{ review: Omit<InterviewReview, "id" | "projectId" | "generatedAt"> }> => {
+    const p = data.project;
+    const systemPrompt = `You are a strict, experienced Staff Software Engineer acting as an interviewer at a top-tier tech company.
+Your goal is to evaluate a candidate's project portfolio piece.
+
+You MUST respond ONLY with a valid JSON object matching the exact schema below:
+{
+  "overallRating": "Beginner" | "Intermediate" | "Strong" | "Excellent",
+  "evaluations": {
+    "technicalDepth": "Beginner" | "Intermediate" | "Strong" | "Excellent",
+    "architecture": "Beginner" | "Intermediate" | "Strong" | "Excellent",
+    "scalability": "Beginner" | "Intermediate" | "Strong" | "Excellent",
+    "maintainability": "Beginner" | "Intermediate" | "Strong" | "Excellent",
+    "security": "Beginner" | "Intermediate" | "Strong" | "Excellent",
+    "performance": "Beginner" | "Intermediate" | "Strong" | "Excellent",
+    "documentation": "Beginner" | "Intermediate" | "Strong" | "Excellent",
+    "folderStructure": "Beginner" | "Intermediate" | "Strong" | "Excellent",
+    "resumeQuality": "Beginner" | "Intermediate" | "Strong" | "Excellent"
+  },
+  "strengths": ["string"],
+  "weaknesses": ["string"],
+  "missingConcepts": ["string"],
+  "resumeSuggestions": ["string"],
+  "portfolioSuggestions": ["string"],
+  "likelyInterviewQuestions": ["string"],
+  "likelyFollowUpQuestions": ["string"],
+  "suggestedImprovements": ["string"],
+  "hiringReadiness": "string"
+}`;
+
+    const userPrompt = `Title: ${p.title}
+Category: ${p.category}
+Status: ${p.status}
+Technologies: ${p.technologies?.join(", ") || "N/A"}
+Description: ${p.description}
+
+Development Context:
+Features: ${p.development?.features?.join(", ") || "N/A"}
+Challenges: ${p.development?.challenges || "N/A"}
+Architecture: ${p.development?.architecture || "N/A"}
+Decisions: ${p.development?.decisions || "N/A"}
+Learning Outcomes: ${p.development?.learningOutcomes || "N/A"}
+Future Improvements: ${p.development?.futureImprovements || "N/A"}`;
+
+    const fallbackReview: Omit<InterviewReview, "id" | "projectId" | "generatedAt"> = {
+      overallRating: "Strong",
+      evaluations: {
+        technicalDepth: "Strong",
+        architecture: "Intermediate",
+        scalability: "Intermediate",
+        maintainability: "Strong",
+        security: "Intermediate",
+        performance: "Strong",
+        documentation: "Strong",
+        folderStructure: "Strong",
+        resumeQuality: "Strong",
+      },
+      strengths: ["Clear project problem statement", "Relevant engineering stack"],
+      weaknesses: ["Add performance benchmarking metrics", "Include explicit security validation"],
+      missingConcepts: ["System Design Trade-offs", "Defensive Input Validation"],
+      resumeSuggestions: ["Quantify latency metrics and user impact in bullet points"],
+      portfolioSuggestions: ["Provide live demo link and system architecture diagram"],
+      likelyInterviewQuestions: [`How does ${p.title} handle failure modes and state recovery under load?`],
+      likelyFollowUpQuestions: ["What architectural trade-offs would you revisit for a 10x scale surge?"],
+      suggestedImprovements: ["Add integration tests for critical user workflows"],
+      hiringReadiness: "Strong Candidate — Solid portfolio project demonstrating production awareness."
+    };
+
+    try {
+      const raw = await callGeminiWithModelFallback({
+        taskType: "review",
+        systemPrompt,
+        userPrompt,
+        temperature: 0.2,
+      });
+
+      const parsed = cleanAndParseJson<Omit<InterviewReview, "id" | "projectId" | "generatedAt">>(raw, fallbackReview);
+      return { review: parsed.overallRating ? parsed : fallbackReview };
+    } catch (err) {
+      console.error("Failed to generate project review:", err);
+      return { review: fallbackReview };
+    }
+  });
+

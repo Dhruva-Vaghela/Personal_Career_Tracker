@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useAppStore } from "@/store/app-store";
-import { aiMentorService } from "@/features/ai-mentor/ai-mentor.service";
+import { generateMissionServerFn } from "@/features/ai-mentor/mission.server";
 import { useGithubAuth } from "@/features/github/hooks/use-github-auth";
 import { useGithubDashboard } from "@/features/github/hooks/use-github-data";
 import careerCurriculum from "@/data/career-curriculum.json";
@@ -65,26 +65,28 @@ function MissionPage() {
         }
       }
 
-      const recommendations = await aiMentorService.generateRecommendations({
-        availableStudyTimeMinutes: 90,
-        weakestSkills: weakSkills,
-        currentPhase: {
-          name: `Module ${activeModule.number}: ${activeModule.title} (${activeTopic.title})`,
-          description: activeTopic.description,
+      const res = await generateMissionServerFn({
+        data: {
+          availableStudyTimeMinutes: 90,
+          weakestSkills: weakSkills,
+          currentPhase: {
+            name: `Module ${activeModule.number}: ${activeModule.title} (${activeTopic.title})`,
+            description: activeTopic.description,
+          },
+          unfinishedProjects: projects.filter(p => p.status !== "Completed").map(p => ({ name: p.title, progress: p.status === "In Progress" ? 50 : 25 })),
+          revisionSchedule: weakSkills.map(w => ({ topic: w.name, priority: 100 - w.score })),
+          githubActivity: {
+            recentCommitsCount: githubData.contributions?.totalContributions || 0,
+            activeRepos: [],
+          },
+          learningStreakDays: learningStreak.currentStreak,
         },
-        unfinishedProjects: projects.filter(p => p.status !== "Completed").map(p => ({ name: p.title, progress: p.status === "In Progress" ? 50 : 25 })),
-        revisionSchedule: weakSkills.map(w => ({ topic: w.name, priority: 100 - w.score })),
-        githubActivity: {
-          recentCommitsCount: githubData.contributions?.totalContributions || 0,
-          activeRepos: [],
-        },
-        learningStreakDays: learningStreak.currentStreak,
-      }, "gemini");
+      });
 
-      setTodaysMission(recommendations.todaysMission);
+      setTodaysMission(res.recommendations.todaysMission);
     } catch (err: any) {
       console.error(err);
-      setError(err.message || "Failed to generate mission. Ensure GEMINI_API_KEY is set in .env.");
+      setError(err.message || "Failed to generate mission. Ensure API key is configured.");
     } finally {
       setIsGenerating(false);
     }
