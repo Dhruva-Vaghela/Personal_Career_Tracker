@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { GithubCacheService } from "../services/github-cache.service";
 import { GithubApiService } from "../services/github-api.service";
-import { exchangeGithubCode, getGithubAuthUrl } from "../services/github-oauth.server";
+import { exchangeGithubCode, getGithubAuthUrl } from "../services/github-oauth-fn";
 import type { GithubUser, GithubAuthState } from "../types/github.types";
 
 export function useGithubAuth() {

@@ -19,7 +19,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useAppStore } from "@/store/app-store";
 import careerCurriculum from "@/data/career-curriculum.json";
 import type { InterviewSession, InterviewTurn, QuestionDifficulty } from "../types";
-import { generateInterviewFollowUpServerFn } from "../services/gemini-assessment.server";
+import { generateInterviewFollowUpServerFn } from "../services/gemini-assessment-fn";
 
 export function InterviewStudio() {
   const [selectedModuleId, setSelectedModuleId] = useState<string>("mod-4");

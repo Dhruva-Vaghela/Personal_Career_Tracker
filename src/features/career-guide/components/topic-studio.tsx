@@ -31,7 +31,7 @@ import {
   evaluateAssessmentAnswersServerFn,
   generateRevisionPlanServerFn,
   generatePracticalTaskServerFn
-} from "../services/gemini-assessment.server";
+} from "../services/gemini-assessment-fn";
 
 interface TopicStudioProps {
   topic: CareerTopic;

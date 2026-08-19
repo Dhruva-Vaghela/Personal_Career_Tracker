@@ -1,5 +1,5 @@
 import type { Project, InterviewReview } from "../types";
-import { generateProjectReviewServerFn } from "@/features/career-guide/services/gemini-assessment.server";
+import { generateProjectReviewServerFn } from "@/features/career-guide/services/gemini-assessment-fn";
 
 export class InterviewReviewService {
   public async generateReview(

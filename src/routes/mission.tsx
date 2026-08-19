@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useAppStore } from "@/store/app-store";
-import { generateMissionServerFn } from "@/features/ai-mentor/mission.server";
+import { generateMissionServerFn } from "@/features/ai-mentor/mission-fn";
 import { useGithubAuth } from "@/features/github/hooks/use-github-auth";
 import { useGithubDashboard } from "@/features/github/hooks/use-github-data";
 import careerCurriculum from "@/data/career-curriculum.json";

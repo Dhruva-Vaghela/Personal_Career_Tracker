@@ -23,7 +23,7 @@ import type { CodeReview, FlawedCodeAssessment } from "../types";
 import {
   evaluateCodeReviewServerFn,
   generateFlawedCodeAssessmentServerFn
-} from "../services/gemini-assessment.server";
+} from "../services/gemini-assessment-fn";
 
 export function CodeReviewStudio() {
   const [activeTab, setActiveTab] = useState<string>("submit-review");
