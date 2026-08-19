@@ -1,33 +1,49 @@
-# Welcome to your Lovable project
+# Engineering OS
 
-This project was built with [Lovable](https://lovable.dev).
+Personal AI-powered Engineering Growth Operating System designed to continuously guide software engineers towards becoming world-class AI Backend Engineers.
 
-## Build with Lovable
+## Overview
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Engineering OS combines personalized learning, coding practice, a 12-Module Career Guide, interactive AI technical interviewing, code review studio, project reviews, analytics, and GitHub insights into a single unified command center.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+## Key Features
 
-## Development
+- **12-Module Career Guide & Topic Studio**: Complete curriculum from Computer Foundations, Web, Frontend, Backend, Databases, Full-Stack, Software Engineering, DevOps, System Design, AI Engineering, to Interview Readiness. Includes 7-Step learning studios, quizzes, blueprint assessments, practical validations, and topic mastery calculations.
+- **Interactive AI Technical Interviewer**: Simulate real technical interview loops with an adaptive AI Staff Engineer that analyzes answers and probes deeper with contextual follow-up questions.
+- **Code Review Studio**: Multi-metric code analysis (Correctness, Performance, Security, Architecture) and "Spot the Bugs" code review challenges.
+- **Personalized Today's Mission**: AI mentor crafts specific, actionable daily missions based on your active curriculum module and identified topic weaknesses.
+- **Progressive Web App (PWA)**: Mobile-optimized, installable web application with offline caching and standalone display.
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## Getting Started
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+```bash
+# Clone repository
+git clone https://github.com/Dhruva-Vaghela/Personal_Career_Tracker.git
+cd Personal_Career_Tracker
+
+# Install dependencies
+npm install
+
+# Run dev server
 npm run dev
+
+# Production build
+npm run build
 ```
 
-## Built with
+## Environment Setup
 
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+Create a `.env` file in the project root:
 
-## Learning Engine
+```env
+GEMINI_API_KEY=your_google_gemini_api_key
+```
 
-The roadmap is JSON-backed at `src/data/roadmaps/ai-backend-engineer.json`. The learning feature validates that document at load time, calculates item- and hour-weighted progress, enforces dependency-based phase unlocking, and estimates completion from a weekly-hour budget. UI routes consume it through `useLearningEngine`; add new phases in JSON without changing those components.
+## Tech Stack
+
+- **Frontend**: React, TypeScript (Strict Mode), Vite, Tailwind CSS, shadcn/ui
+- **Routing & SSR**: TanStack Start, TanStack Router
+- **State & Data**: Zustand, React Query
+- **Charts**: Recharts
+- **Icons**: Lucide React
+- **AI Engine**: Google Gemini API
