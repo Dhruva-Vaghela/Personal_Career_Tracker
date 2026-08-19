@@ -7,6 +7,7 @@ import { useKnowledgeGraph } from "@/features/knowledge/hooks/use-knowledge-grap
 import type { KnowledgeNode } from "@/features/knowledge/types";
 
 export const Route = createFileRoute("/knowledge")({
+  ssr: false,
   head: () => ({
     meta: [
       { title: "Knowledge Graph · Engineering OS" },
@@ -29,7 +30,6 @@ function KnowledgePage() {
   const [selectedNode, setSelectedNode] = useState<KnowledgeNode | null>(null);
 
   const handleNodeClick = (node: KnowledgeNode) => {
-    // Toggle selection
     if (selectedNode?.id === node.id) {
       setSelectedNode(null);
     } else {
@@ -37,9 +37,8 @@ function KnowledgePage() {
     }
   };
 
-  // Keep selected node state in sync with mastery updates
-  const activeSelectedNode = selectedNode 
-    ? graphData.nodes.find(n => n.id === selectedNode.id) || selectedNode
+  const activeSelectedNode = selectedNode
+    ? graphData.nodes.find((n) => n.id === selectedNode.id) || selectedNode
     : null;
 
   return (
@@ -60,7 +59,7 @@ function KnowledgePage() {
               />
             )}
           </div>
-          
+
           <div className="h-full">
             <KnowledgeSidebar
               filter={filter}
