@@ -5,11 +5,15 @@ import { exchangeGithubCode, getGithubAuthUrl } from "../services/github-oauth-f
 import type { GithubUser, GithubAuthState } from "../types/github.types";
 
 export function useGithubAuth() {
-  const [authState, setAuthState] = useState<GithubAuthState>({
-    token: GithubCacheService.getToken(),
-    user: GithubCacheService.getCachedUser<GithubUser>(),
-    isLoading: true,
-    error: null,
+  const [authState, setAuthState] = useState<GithubAuthState>(() => {
+    const token = GithubCacheService.getToken();
+    const user = GithubCacheService.getCachedUser<GithubUser>();
+    return {
+      token,
+      user,
+      isLoading: Boolean(token && !user),
+      error: null,
+    };
   });
 
   const [authUrl, setAuthUrl] = useState<string | null>(null);
@@ -41,6 +45,30 @@ export function useGithubAuth() {
       });
       return user;
     } catch (err: any) {
+      const cachedUser = GithubCacheService.getCachedUser<GithubUser>();
+      // Only remove token if server explicitly returned 401 Unauthorized
+      if (err?.status === 401) {
+        GithubCacheService.removeToken();
+        setAuthState({
+          token: null,
+          user: null,
+          isLoading: false,
+          error: "Invalid GitHub token. Please re-authenticate.",
+        });
+        throw new Error("Invalid GitHub token");
+      }
+
+      // If offline, rate limited, or network error occurred, keep cached token and user session active
+      if (cachedUser) {
+        setAuthState({
+          token,
+          user: cachedUser,
+          isLoading: false,
+          error: err?.message || null,
+        });
+        return cachedUser;
+      }
+
       const msg = err?.message || "Failed to authenticate token with GitHub.";
       setAuthState((prev) => ({
         ...prev,
@@ -78,8 +106,7 @@ export function useGithubAuth() {
     const token = GithubCacheService.getToken();
     if (token) {
       verifyAndSaveToken(token).catch(() => {
-        // Clear invalid token
-        GithubCacheService.removeToken();
+        // Handled inside verifyAndSaveToken
       });
     } else {
       setAuthState((prev) => ({ ...prev, isLoading: false }));
@@ -113,3 +140,4 @@ export function useGithubAuth() {
     refetchUser: () => authState.token && verifyAndSaveToken(authState.token),
   };
 }
+

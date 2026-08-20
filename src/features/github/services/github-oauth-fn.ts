@@ -57,6 +57,7 @@ export const exchangeGithubCode = createServerFn({ method: "POST" })
 export const getGithubAuthUrl = createServerFn({ method: "GET" }).handler(
   async (): Promise<{ url: string | null; clientIdConfigured: boolean }> => {
     const clientId = process.env.GITHUB_CLIENT_ID;
+    const redirectUri = process.env.GITHUB_CALLBACK_URL || "http://localhost:8080/auth/github/callback";
 
     if (!clientId) {
       return { url: null, clientIdConfigured: false };
@@ -64,6 +65,7 @@ export const getGithubAuthUrl = createServerFn({ method: "GET" }).handler(
 
     const params = new URLSearchParams({
       client_id: clientId,
+      redirect_uri: redirectUri,
       scope: "read:user,repo,user:email",
     });
 
@@ -73,3 +75,4 @@ export const getGithubAuthUrl = createServerFn({ method: "GET" }).handler(
     };
   },
 );
+

@@ -6,6 +6,9 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import netlify from "@netlify/vite-plugin-tanstack-start";
 
 export default defineConfig({
+  server: {
+    port: 8080,
+  },
   css: {
     transformer: "postcss",
   },
@@ -16,3 +19,4 @@ export default defineConfig({
     netlify(),
   ],
 });
+

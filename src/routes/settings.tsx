@@ -35,12 +35,20 @@ function SettingsPage() {
   };
 
   const handleExportData = () => {
-    const data = localStorage.getItem("engineeros-storage");
-    if (!data) {
+    const backupObj = {
+      appStore: localStorage.getItem("engineeros-storage"),
+      codingStore: localStorage.getItem("engineeros-coding-practice"),
+      githubToken: localStorage.getItem("eos_github_access_token"),
+      githubUser: localStorage.getItem("eos_github_user_cache"),
+      version: 1,
+      exportedAt: new Date().toISOString(),
+    };
+
+    if (!backupObj.appStore && !backupObj.codingStore) {
       toast.error("No data found to export");
       return;
     }
-    const blob = new Blob([data], { type: "application/json" });
+    const blob = new Blob([JSON.stringify(backupObj, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -49,7 +57,7 @@ function SettingsPage() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    toast.success("Data exported successfully");
+    toast.success("Full system backup exported successfully");
   };
 
   const handleImportData = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,10 +67,20 @@ function SettingsPage() {
     const reader = new FileReader();
     reader.onload = (event) => {
       try {
-        const json = event.target?.result as string;
-        // Validate JSON
-        JSON.parse(json);
-        localStorage.setItem("engineeros-storage", json);
+        const text = event.target?.result as string;
+        const parsed = JSON.parse(text);
+
+        // Support legacy backup format (raw appStore string) or new full backup format
+        if (parsed.appStore || parsed.codingStore) {
+          if (parsed.appStore) localStorage.setItem("engineeros-storage", parsed.appStore);
+          if (parsed.codingStore) localStorage.setItem("engineeros-coding-practice", parsed.codingStore);
+          if (parsed.githubToken) localStorage.setItem("eos_github_access_token", parsed.githubToken);
+          if (parsed.githubUser) localStorage.setItem("eos_github_user_cache", parsed.githubUser);
+        } else {
+          // Legacy format
+          localStorage.setItem("engineeros-storage", text);
+        }
+
         toast.success("Data imported successfully. Reloading...");
         setTimeout(() => window.location.reload(), 1000);
       } catch (err) {
