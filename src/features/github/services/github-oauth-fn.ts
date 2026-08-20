@@ -63,9 +63,8 @@ export const getGithubAuthUrl = createServerFn({ method: "GET" })
   .handler(
     async ({ data }): Promise<{ url: string | null; clientIdConfigured: boolean }> => {
       const clientId = process.env.GITHUB_CLIENT_ID;
-      const fallbackCallback =
-        process.env.GITHUB_CALLBACK_URL || "http://localhost:8080/auth/github/callback";
-      const redirectUri = data?.redirectUri || fallbackCallback;
+      const fallbackCallback = "http://localhost:8080/auth/github/callback";
+      const redirectUri = process.env.GITHUB_CALLBACK_URL || data?.redirectUri || fallbackCallback;
 
       if (!clientId) {
         return { url: null, clientIdConfigured: false };
