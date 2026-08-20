@@ -19,9 +19,12 @@ export function useGithubAuth() {
   const [authUrl, setAuthUrl] = useState<string | null>(null);
   const [isOAuthAvailable, setIsOAuthAvailable] = useState<boolean>(false);
 
-  // Initialize OAuth URL
+  // Initialize OAuth URL dynamically matching current site origin (deployed URL or localhost)
   useEffect(() => {
-    getGithubAuthUrl()
+    const origin = typeof window !== "undefined" ? window.location.origin : "";
+    const redirectUri = origin ? `${origin}/auth/github/callback` : undefined;
+
+    getGithubAuthUrl({ data: { redirectUri } })
       .then((res) => {
         setAuthUrl(res.url);
         setIsOAuthAvailable(res.clientIdConfigured);

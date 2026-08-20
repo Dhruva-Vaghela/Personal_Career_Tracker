@@ -33,3 +33,5 @@ dist-ssr
 .env
 .env.local
 .vscode/settings.json
+# Local Netlify folder
+.netlify

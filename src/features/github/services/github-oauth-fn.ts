@@ -54,25 +54,34 @@ export const exchangeGithubCode = createServerFn({ method: "POST" })
     return json;
   });
 
-export const getGithubAuthUrl = createServerFn({ method: "GET" }).handler(
-  async (): Promise<{ url: string | null; clientIdConfigured: boolean }> => {
-    const clientId = process.env.GITHUB_CLIENT_ID;
-    const redirectUri = process.env.GITHUB_CALLBACK_URL || "http://localhost:8080/auth/github/callback";
+interface GetAuthUrlPayload {
+  redirectUri?: string;
+}
 
-    if (!clientId) {
-      return { url: null, clientIdConfigured: false };
-    }
+export const getGithubAuthUrl = createServerFn({ method: "GET" })
+  .validator((data?: GetAuthUrlPayload) => data)
+  .handler(
+    async ({ data }): Promise<{ url: string | null; clientIdConfigured: boolean }> => {
+      const clientId = process.env.GITHUB_CLIENT_ID;
+      const fallbackCallback =
+        process.env.GITHUB_CALLBACK_URL || "http://localhost:8080/auth/github/callback";
+      const redirectUri = data?.redirectUri || fallbackCallback;
 
-    const params = new URLSearchParams({
-      client_id: clientId,
-      redirect_uri: redirectUri,
-      scope: "read:user,repo,user:email",
-    });
+      if (!clientId) {
+        return { url: null, clientIdConfigured: false };
+      }
 
-    return {
-      url: `https://github.com/login/oauth/authorize?${params.toString()}`,
-      clientIdConfigured: true,
-    };
-  },
-);
+      const params = new URLSearchParams({
+        client_id: clientId,
+        redirect_uri: redirectUri,
+        scope: "read:user,repo,user:email",
+      });
+
+      return {
+        url: `https://github.com/login/oauth/authorize?${params.toString()}`,
+        clientIdConfigured: true,
+      };
+    },
+  );
+
 
