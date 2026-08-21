@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Target, Clock, Zap, CheckCircle2, Circle, Loader2, BookOpen } from "lucide-react";
+import { Target, Clock, Zap, CheckCircle2, Circle, Loader2, BookOpen, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { PageBody, PageHeader } from "@/components/app-shell";
 import { Panel } from "@/components/stat-card";
@@ -40,6 +40,9 @@ function MissionPage() {
 
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [customRequirement, setCustomRequirement] = useState(
+    todaysMission?.customRequirement || ""
+  );
 
   const handleGenerateMission = async () => {
     setIsGenerating(true);
@@ -65,6 +68,8 @@ function MissionPage() {
         }
       }
 
+      const trimmedRequirement = customRequirement.trim();
+
       const res = await generateMissionServerFn({
         data: {
           availableStudyTimeMinutes: 90,
@@ -80,6 +85,7 @@ function MissionPage() {
             activeRepos: [],
           },
           learningStreakDays: learningStreak.currentStreak,
+          customRequirement: trimmedRequirement ? trimmedRequirement : undefined,
         },
       });
 
@@ -101,21 +107,45 @@ function MissionPage() {
         <PageHeader
           eyebrow="AI Mentor"
           title="Ready for your next mission?"
-          description="Generate a personalized mission based on your active 12-Module Career Guide topic and weaknesses."
+          description="Generate a personalized mission based on your active 12-Module Career Guide topic, weaknesses, and custom requirements."
         />
         <PageBody>
-          <div className="surface-panel flex flex-col items-center justify-center p-12 text-center">
+          <div className="surface-panel flex flex-col items-center justify-center p-8 text-center max-w-2xl mx-auto">
             <Target className="mb-4 h-12 w-12 text-muted-foreground/30" />
             <h3 className="mb-2 text-lg font-semibold">No active mission</h3>
-            <p className="mb-6 max-w-md text-[13px] text-muted-foreground">
+            <p className="mb-6 max-w-lg text-[13px] text-muted-foreground">
               Your AI Mentor will analyze your active 12-Module Career Guide progress, identified topic weaknesses, and GitHub activity to craft today's mission.
             </p>
+
+            <div className="w-full text-left mb-6 space-y-2">
+              <label htmlFor="custom-requirement" className="block text-[13px] font-medium text-foreground">
+                What do you want to focus on today?
+              </label>
+              <textarea
+                id="custom-requirement"
+                value={customRequirement}
+                onChange={(e) => setCustomRequirement(e.target.value)}
+                maxLength={1000}
+                disabled={isGenerating}
+                placeholder="Example: I want to read Redis documentation for 2 hours and practice implementing caching..."
+                rows={3}
+                className="w-full rounded-md border border-border bg-background/50 px-3 py-2 text-[13px] text-foreground shadow-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-primary disabled:opacity-50 resize-none"
+              />
+              <div className="flex items-center justify-between text-[11px] text-muted-foreground">
+                <span>
+                  Tell your AI mentor what you want to accomplish today. Your request will be used to personalize your mission and schedule.
+                </span>
+                <span className="font-mono ml-2 shrink-0">{customRequirement.length} / 1000</span>
+              </div>
+            </div>
+
             {error && (
-              <div className="mb-6 rounded-md bg-destructive/10 px-4 py-2 text-[12px] text-destructive max-w-md">
+              <div className="mb-6 rounded-md bg-destructive/10 px-4 py-2 text-[12px] text-destructive max-w-lg w-full text-left">
                 {error}
               </div>
             )}
-            <Button onClick={handleGenerateMission} disabled={isGenerating} className="gap-2">
+
+            <Button onClick={handleGenerateMission} disabled={isGenerating} className="gap-2 w-full sm:w-auto">
               {isGenerating ? <Loader2 className="h-4 w-4 animate-spin" /> : <Zap className="h-4 w-4" />}
               {isGenerating ? "Analyzing 12-Module context..." : "Generate Today's Mission"}
             </Button>
@@ -161,6 +191,12 @@ function MissionPage() {
               <p className="mt-3 max-w-2xl text-[13.5px] leading-relaxed text-muted-foreground">
                 {todaysMission.description}
               </p>
+              {todaysMission.customRequirement && (
+                <div className="mt-4 inline-flex items-center gap-1.5 rounded-md border border-primary/30 bg-primary/10 px-2.5 py-1 text-[11px] text-primary">
+                  <Sparkles className="h-3 w-3 shrink-0" />
+                  <span>Custom Focus: "{todaysMission.customRequirement}"</span>
+                </div>
+              )}
             </div>
 
             <Panel title="Checklist" action={<span className="text-[11px] text-muted-foreground">{completedCount} / {checklistItems.length}</span>}>
@@ -212,8 +248,35 @@ function MissionPage() {
             
             <Panel title="Need a new mission?">
               <p className="text-[12px] text-muted-foreground mb-3">
-                If this mission doesn't fit your schedule today, you can ask your AI mentor to generate a new one.
+                If this mission doesn't fit your schedule today, you can update your focus requirement and ask your AI mentor to generate a new schedule.
               </p>
+
+              <div className="space-y-1.5 mb-3 text-left">
+                <label htmlFor="sidebar-custom-requirement" className="block text-[11px] font-medium text-foreground">
+                  What do you want to focus on today?
+                </label>
+                <textarea
+                  id="sidebar-custom-requirement"
+                  value={customRequirement}
+                  onChange={(e) => setCustomRequirement(e.target.value)}
+                  maxLength={1000}
+                  disabled={isGenerating}
+                  placeholder="Example: I want to read Redis documentation for 2 hours..."
+                  rows={3}
+                  className="w-full rounded-md border border-border bg-background/50 px-2.5 py-1.5 text-[12px] text-foreground shadow-sm placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-primary disabled:opacity-50 resize-none"
+                />
+                <div className="flex items-center justify-between text-[10px] text-muted-foreground">
+                  <span>Custom requirement</span>
+                  <span className="font-mono">{customRequirement.length} / 1000</span>
+                </div>
+              </div>
+
+              {error && (
+                <div className="mb-3 rounded-md bg-destructive/10 px-3 py-1.5 text-[11px] text-destructive">
+                  {error}
+                </div>
+              )}
+
               <Button 
                 variant="outline" 
                 size="sm" 
@@ -222,7 +285,7 @@ function MissionPage() {
                 disabled={isGenerating}
               >
                 {isGenerating ? <Loader2 className="h-3 w-3 animate-spin mr-2" /> : null}
-                Regenerate Mission
+                {isGenerating ? "Regenerating..." : "Regenerate Mission"}
               </Button>
             </Panel>
           </div>

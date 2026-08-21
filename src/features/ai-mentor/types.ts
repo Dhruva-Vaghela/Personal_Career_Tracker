@@ -8,6 +8,7 @@ export interface MentorContext {
   revisionSchedule: Array<{ topic: string; priority: number }>;
   githubActivity: { recentCommitsCount: number; activeRepos: string[] };
   learningStreakDays: number;
+  customRequirement?: string;
 }
 
 export interface MentorRecommendation {
@@ -17,6 +18,7 @@ export interface MentorRecommendation {
     checklist: string[];
     estimatedTimeMinutes: number;
     reason: string;
+    customRequirement?: string;
   };
   weeklyGoal: {
     title: string;

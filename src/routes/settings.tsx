@@ -193,14 +193,23 @@ function SettingsPage() {
                         View Dashboard
                       </Button>
                     </Link>
-                    <Button size="sm" variant="ghost" onClick={disconnect} className="text-xs text-destructive">
-                      Disconnect
+                    <Button 
+                      size="sm" 
+                      variant="ghost" 
+                      onClick={() => {
+                        if (window.confirm("Are you sure you want to disconnect your GitHub account?")) {
+                          disconnect();
+                        }
+                      }} 
+                      className="text-xs text-destructive hover:bg-destructive/10 hover:text-destructive"
+                    >
+                      Disconnect GitHub
                     </Button>
                   </div>
                 ) : (
                   <Link to="/github" search={{ code: undefined }}>
                     <Button size="sm" variant="secondary">
-                      Connect
+                      Connect GitHub
                     </Button>
                   </Link>
                 )}

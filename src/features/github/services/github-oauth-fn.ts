@@ -83,4 +83,83 @@ export const getGithubAuthUrl = createServerFn({ method: "GET" })
     },
   );
 
+export interface SaveConnectionPayload {
+  token: string;
+  user: any;
+}
+
+export const saveGithubConnectionServerFn = createServerFn({ method: "POST" })
+  .validator((data: SaveConnectionPayload) => data)
+  .handler(async ({ data }) => {
+    try {
+      const { getMongoDb } = await import("@/lib/mongodb");
+      const db = await getMongoDb();
+      await db.collection("github_connections").updateOne(
+        { id: "single_user_github" },
+        {
+          $set: {
+            id: "single_user_github",
+            connected: true,
+            accessToken: data.token,
+            userProfile: data.user,
+            username: data.user?.login || "",
+            githubUserId: String(data.user?.id || ""),
+            updatedAt: new Date().toISOString(),
+          },
+          $setOnInsert: {
+            connectedAt: new Date().toISOString(),
+          },
+        },
+        { upsert: true }
+      );
+      return { success: true };
+    } catch (err: any) {
+      console.warn("MongoDB connection save warning:", err.message);
+      return { success: false, error: err.message };
+    }
+  });
+
+export const getGithubConnectionServerFn = createServerFn({ method: "GET" })
+  .handler(async () => {
+    try {
+      const { getMongoDb } = await import("@/lib/mongodb");
+      const db = await getMongoDb();
+      const doc = await db.collection("github_connections").findOne({ id: "single_user_github" });
+      if (!doc || !doc.connected || !doc.accessToken) {
+        return { connected: false, token: null, user: null };
+      }
+      return {
+        connected: true,
+        token: doc.accessToken as string,
+        user: doc.userProfile || null,
+        username: (doc.username as string) || (doc.userProfile?.login as string) || "",
+      };
+    } catch (err: any) {
+      console.warn("MongoDB connection get warning:", err.message);
+      return { connected: false, token: null, user: null, error: err.message };
+    }
+  });
+
+export const disconnectGithubServerFn = createServerFn({ method: "POST" })
+  .handler(async () => {
+    try {
+      const { getMongoDb } = await import("@/lib/mongodb");
+      const db = await getMongoDb();
+      await db.collection("github_connections").updateOne(
+        { id: "single_user_github" },
+        {
+          $set: {
+            connected: false,
+            accessToken: null,
+            updatedAt: new Date().toISOString(),
+          },
+        }
+      );
+      return { success: true };
+    } catch (err: any) {
+      console.warn("MongoDB connection disconnect warning:", err.message);
+      return { success: false, error: err.message };
+    }
+  });
+
 

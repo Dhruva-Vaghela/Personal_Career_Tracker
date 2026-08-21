@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { GithubApiService } from "../services/github-api.service";
+import { GithubCacheService } from "../services/github-cache.service";
 import type { GithubUser, GithubRepo } from "../types/github.types";
 
 const FIVE_MINUTES = 5 * 60 * 1000;
@@ -75,23 +77,57 @@ export function useGithubDashboard(token: string | null, user: GithubUser | null
   const username = user?.login;
 
   const reposQuery = useGithubRepos(token, username);
-  const repos = reposQuery.data || [];
-
   const activityQuery = useGithubActivity(token, username);
   const prsQuery = useGithubPullRequests(token, username);
   const issuesQuery = useGithubIssues(token, username);
-  const commitsQuery = useGithubCommits(token, username, repos);
   const contributionsQuery = useGithubContributions(token, username);
 
-  const languages = GithubApiService.calculateLanguageDistribution(repos);
-  const pinnedRepos = GithubApiService.getPinnedRepos(repos);
+  const repos = reposQuery.data || [];
+  const commitsQuery = useGithubCommits(token, username, repos);
+
+  const cachedDashboard = GithubCacheService.getCachedDashboardData<{
+    repos: GithubRepo[];
+    activity: any[];
+    pullRequests: any[];
+    issues: any[];
+    commits: any[];
+    contributions: any;
+    updatedAt: string;
+  }>();
+
+  // Cache last known successful dashboard state
+  useEffect(() => {
+    if (reposQuery.data || contributionsQuery.data) {
+      GithubCacheService.setCachedDashboardData({
+        repos: reposQuery.data || cachedDashboard?.repos || [],
+        activity: activityQuery.data || cachedDashboard?.activity || [],
+        pullRequests: prsQuery.data || cachedDashboard?.pullRequests || [],
+        issues: issuesQuery.data || cachedDashboard?.issues || [],
+        commits: commitsQuery.data || cachedDashboard?.commits || [],
+        contributions: contributionsQuery.data || cachedDashboard?.contributions || null,
+        updatedAt: new Date().toISOString(),
+      });
+    }
+  }, [
+    reposQuery.data,
+    activityQuery.data,
+    prsQuery.data,
+    issuesQuery.data,
+    commitsQuery.data,
+    contributionsQuery.data,
+  ]);
+
+  const finalRepos = reposQuery.data || cachedDashboard?.repos || [];
+  const languages = GithubApiService.calculateLanguageDistribution(finalRepos);
+  const pinnedRepos = GithubApiService.getPinnedRepos(finalRepos);
 
   const isLoading =
-    reposQuery.isLoading ||
-    activityQuery.isLoading ||
-    prsQuery.isLoading ||
-    issuesQuery.isLoading ||
-    contributionsQuery.isLoading;
+    !cachedDashboard &&
+    (reposQuery.isLoading ||
+      activityQuery.isLoading ||
+      prsQuery.isLoading ||
+      issuesQuery.isLoading ||
+      contributionsQuery.isLoading);
 
   const isError =
     reposQuery.isError ||
@@ -109,14 +145,15 @@ export function useGithubDashboard(token: string | null, user: GithubUser | null
     null;
 
   return {
-    repos,
+    repos: finalRepos,
     pinnedRepos,
     languages,
-    activity: activityQuery.data || [],
-    pullRequests: prsQuery.data || [],
-    issues: issuesQuery.data || [],
-    commits: commitsQuery.data || [],
-    contributions: contributionsQuery.data || null,
+    activity: activityQuery.data || cachedDashboard?.activity || [],
+    pullRequests: prsQuery.data || cachedDashboard?.pullRequests || [],
+    issues: issuesQuery.data || cachedDashboard?.issues || [],
+    commits: commitsQuery.data || cachedDashboard?.commits || [],
+    contributions: contributionsQuery.data || cachedDashboard?.contributions || null,
+    lastUpdated: cachedDashboard?.updatedAt || null,
     isLoading,
     isError,
     error,

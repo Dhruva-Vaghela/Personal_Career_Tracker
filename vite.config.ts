@@ -30,10 +30,6 @@ export default defineConfig({
     },
   },
 
-  esbuild: {
-    jsxDev: false,
-  },
-
   plugins: [
     tanstackStart(),
     nitro(),

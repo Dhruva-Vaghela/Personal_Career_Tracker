@@ -37,25 +37,49 @@ export class AiMentorService {
     try {
       const rawJsonString = await provider.generateJson(systemPrompt, userPrompt);
       const parsed = this.parseAndValidate(rawJsonString);
+      if (context.customRequirement?.trim()) {
+        parsed.todaysMission.customRequirement = context.customRequirement.trim();
+      }
       return parsed;
     } catch (error) {
       console.warn("AI Mentor API call unavailable or 503 spike. Generating high-quality contextual fallback mission:", error);
       
       const phaseName = context.currentPhase.name || "Software Engineering Foundations";
       const phaseDesc = context.currentPhase.description || "Mastering fundamental engineering principles.";
+      const customReq = context.customRequirement?.trim();
       
-      return {
-        todaysMission: {
-          title: `Mastery Focus — ${phaseName}`,
-          description: `Targeted practice for ${phaseName}: ${phaseDesc}`,
-          checklist: [
+      const missionTitle = customReq 
+        ? `Focus Goal: ${customReq.slice(0, 45)}${customReq.length > 45 ? "..." : ""}`
+        : `Mastery Focus — ${phaseName}`;
+        
+      const missionDesc = customReq
+        ? `Personalized mission built for your focus request: "${customReq}". Aligned with ${phaseName}.`
+        : `Targeted practice for ${phaseName}: ${phaseDesc}`;
+
+      const checklist = customReq
+        ? [
+            `Deep dive: ${customReq}`,
+            `Complete 30-45 minutes of hands-on practice or code implementation`,
+            `Test, debug, and document your learnings`,
+            `Review concepts against ${phaseName} curriculum requirements`
+          ]
+        : [
             `Review core subtopics and documentation for ${phaseName}`,
             `Complete at least 2 practice & debugging exercises`,
             `Take the 5-question Topic Quiz and target score ≥ 80%`,
             `Review edge cases, failure modes, and performance trade-offs`
-          ],
+          ];
+
+      return {
+        todaysMission: {
+          title: missionTitle,
+          description: missionDesc,
+          checklist,
           estimatedTimeMinutes: context.availableStudyTimeMinutes || 90,
-          reason: `Personalized daily focus on ${phaseName} based on your active 12-Module Career Guide curriculum.`
+          reason: customReq 
+            ? `Built specifically from your requested constraint: "${customReq}".`
+            : `Personalized daily focus on ${phaseName} based on your active 12-Module Career Guide curriculum.`,
+          ...(customReq ? { customRequirement: customReq } : {})
         },
         weeklyGoal: {
           title: `Complete ${phaseName}`,

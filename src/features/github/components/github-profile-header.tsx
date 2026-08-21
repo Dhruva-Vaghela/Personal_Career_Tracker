@@ -17,6 +17,16 @@ export function GithubProfileHeader({
   onDisconnect,
   isRefreshing,
 }: GithubProfileHeaderProps) {
+  const handleDisconnectClick = () => {
+    if (
+      window.confirm(
+        "Are you sure you want to disconnect your GitHub account? Your connection will be removed from your account."
+      )
+    ) {
+      onDisconnect();
+    }
+  };
+
   return (
     <div className="rounded-xl border border-border bg-card p-5 shadow-sm transition-all">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -38,6 +48,9 @@ export function GithubProfileHeader({
               >
                 @{user.login} <ExternalLink className="h-3 w-3" />
               </a>
+              <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-medium text-emerald-500">
+                ✓ GitHub Connected
+              </span>
             </div>
             {user.bio && (
               <p className="max-w-xl text-xs text-muted-foreground line-clamp-2">
@@ -81,16 +94,16 @@ export function GithubProfileHeader({
             className="gap-1.5 text-xs"
           >
             <RefreshCw className={`h-3.5 w-3.5 ${isRefreshing ? "animate-spin" : ""}`} />
-            Sync
+            Refresh GitHub Data
           </Button>
           <Button
             size="sm"
             variant="ghost"
-            onClick={onDisconnect}
+            onClick={handleDisconnectClick}
             className="gap-1.5 text-xs text-destructive hover:bg-destructive/10 hover:text-destructive"
           >
             <LogOut className="h-3.5 w-3.5" />
-            Disconnect
+            Disconnect GitHub
           </Button>
         </div>
       </div>

@@ -95,7 +95,7 @@ function Heatmap({ data }: { data?: { date: string; count: number }[] }) {
 function Dashboard() {
   const { token, user } = useGithubAuth();
   const githubData = useGithubDashboard(token, user);
-  const heatmapData = githubData.contributions?.weeks.flatMap(w => w.days) || [];
+  const heatmapData = githubData.contributions?.weeks.flatMap((w: any) => w.days) || [];
   
   const {
     analytics,
